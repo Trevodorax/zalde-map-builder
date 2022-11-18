@@ -8,6 +8,7 @@
 # Compiler settings
 CC := gcc
 CFLAGS := -Wall -g
+LIBS:= $(shell sdl2-config --cflags --libs)
 
 # Executable
 EXE := bin/index
@@ -29,17 +30,17 @@ OBJS := $(MAINO) $(UTILSO)
 # Build executable
 $(EXE): $(OBJS)
 	@mkdir -p bin
-	$(CC) $(OBJS) -o $@
+	$(CC) $(OBJS) $(LIBS) -o $@
 
 # Build main object
 $(MAINO): $(MAINC)
 	@mkdir -p build
-	$(CC) $(CFLAGS) -c $(MAINC) -o $@
+	$(CC) -c $(MAINC) $(CFLAGS) -o $@ 
 
 # Build utils object
 $(UTILSO): $(UTILSC)
 	@mkdir -p build
-	$(CC) $(CFLAGS) -c $(UTILSC) -o $@
+	$(CC) -c $(UTILSC) $(CFLAGS)  -o $@
 
 # Clean build
 clean:
