@@ -2,6 +2,7 @@
 
 int main(int argc, char *argv[])
 {
+    printHi();
     SDL_Window *window = NULL;
     int statut = EXIT_FAILURE;
 

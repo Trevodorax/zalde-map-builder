@@ -17,9 +17,9 @@ EXE := bin/index
 MAINO := build/main.o
 MAINC := src/main.c
 
-# Utils object & source file
+# General utilities file
 UTILSO := build/utils.o
-UTILSC := lib/utils.c
+UTILSC := src/utils.c
 
 # Objects string
 OBJS := $(MAINO) $(UTILSO)
