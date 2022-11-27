@@ -1,5 +1,7 @@
 #include <SDL2/SDL.h>
 
+#include "./constants.h"
+
 #ifndef _UTILS_H
 #include "utils.h"
 #endif

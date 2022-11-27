@@ -3,26 +3,37 @@
 int main(int argc, char *argv[])
 {
     printHi();
-    SDL_Window *window = NULL;
-    int statut = EXIT_FAILURE;
+    WindowAndRenderer_t window1;
+    int exitStatus = EXIT_FAILURE;
 
     if(0 != SDL_Init(SDL_INIT_VIDEO))
     {
         fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
         goto Quit;
     }
-    window = SDL_CreateWindow("SDL2", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                              640, 480, SDL_WINDOW_SHOWN);
-    if(NULL == window)
-    {
-        fprintf(stderr, "Erreur SDL_CreateWindow : %s", SDL_GetError());
+
+    if(initWindowAndRenderer(&window1, "Window 1", WINDOW_SIZE) != 0) {
         goto Quit;
     }
-     
-    statut = EXIT_SUCCESS;
+
+    if(setBackgroundColor(window1.renderer, red) != 0) {
+        goto Quit;
+    }
+
+    SDL_RenderPresent(window1.renderer);
+
     SDL_Delay(3000);
-    SDL_DestroyWindow(window);
+    exitStatus = EXIT_SUCCESS;
+
 Quit:
+    if(window1.window)
+    {
+        SDL_DestroyWindow(window1.window);
+    }
+    if(window1.renderer)
+    {
+        SDL_DestroyRenderer(window1.renderer);
+    }
     SDL_Quit();
-    return statut;
+    return exitStatus;
 }

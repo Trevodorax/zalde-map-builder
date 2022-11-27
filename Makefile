@@ -21,11 +21,16 @@ MAINC := src/main.c
 UTILSO := build/utils.o
 UTILSC := src/utils.c
 
+# General utilities for SDL2
+SDLUTILSO := build/SDLUtils.o
+SDLUTILSC := src/SDLUtils.c
+
+# Handling 2 windows and the communication between them
+WINDOWMANAGERO := build/windowManager.o
+WINDOWMANAGERC := src/windowManager.c
+
 # Objects string
-OBJS := $(MAINO) $(UTILSO)
-
-
-# TARGETS
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -41,6 +46,16 @@ $(MAINO): $(MAINC)
 $(UTILSO): $(UTILSC)
 	@mkdir -p build
 	$(CC) -c $(UTILSC) $(CFLAGS)  -o $@
+
+# Build SDL utils object
+$(SDLUTILSO): $(SDLUTILSC)
+	@mkdir -p build
+	$(CC) -c $(SDLUTILSC) $(CFLAGS) -o $@
+
+# Build SDL utils object
+$(WINDOWMANAGERO): $(WINDOWMANAGERC)
+	@mkdir -p build
+	$(CC) -c $(WINDOWMANAGERC) $(CFLAGS) -o $@
 
 # Clean build
 clean:

@@ -4,4 +4,4 @@
 typedef struct {
     SDL_Window * window;
     SDL_Renderer * renderer;
-} WindowRenderer_t;
+} WindowAndRenderer_t;
