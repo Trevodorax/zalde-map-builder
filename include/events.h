@@ -3,6 +3,12 @@
 
 #include <SDL2/SDL.h>
 
-int handleEvent(SDL_Event event);
+#include "typedefs.h"
+
+int handleEvent(
+    SDL_Event event, 
+    clickListener_t * clickListeners, 
+    size_t clickListenersSize
+);
 
 #endif

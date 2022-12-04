@@ -10,9 +10,10 @@ Must be very generic and not have anything specific to the game
 #include "typedefs.h"
 
 int initWindowAndRenderer(
-    WindowAndRenderer_t * createdWindow,
+    windowAndRenderer_t * createdWindow,
     const char * windowTitle,
-    size_t windowSize
+    size_t windowSizeX,
+    size_t windowSizeY
 );
 
 int setDrawColor(

@@ -1,9 +1,10 @@
 #include "windowManager.h"
 
-#define WINDOW_SIZE 512
+#define WINDOW_SIZE_X 1025
+#define WINDOW_SIZE_Y 512
 
-int initMainWindow(WindowAndRenderer_t * mainWindow) {
-    if(initWindowAndRenderer(mainWindow, "Map builder", WINDOW_SIZE) != 0) {
+int initMainWindow(windowAndRenderer_t * mainWindow) {
+    if(initWindowAndRenderer(mainWindow, "Map builder", WINDOW_SIZE_X, WINDOW_SIZE_Y) != 0) {
         return -1;
     }
 

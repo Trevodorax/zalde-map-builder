@@ -6,8 +6,14 @@
 1... to do nothing in main
 */
 
-int handleEvent(SDL_Event event) 
-{
+int handleEvent(
+    SDL_Event event, 
+    clickListener_t * clickListeners, 
+    size_t clickListenersSize
+) 
+{   
+    size_t i;
+
     switch(event.type) 
     {
         // handle window exit icon
@@ -28,11 +34,22 @@ int handleEvent(SDL_Event event)
         case SDL_MOUSEBUTTONDOWN:
             switch(event.button.button) 
             {
+                
 
                 // handle left click
                 case SDL_BUTTON_LEFT:
                     // get the coords of click
-                    printf("\nLeft click at (%d, %d)", event.button.x, event.button.y);
+                    SDL_Point clickCoords = {event.button.x, event.button.y};
+                    
+                    // check every click listener
+                    for(i = 0; i < clickListenersSize; i++)
+                    {
+                        // if the click was on the click listener, execute the clicklistener's function
+                        if(SDL_PointInRect(&clickCoords, &(clickListeners[i].clickZone)))
+                        {
+                            clickListeners[i].onClick(clickCoords.x, clickCoords.y);
+                        }
+                    }
                     return 1;
                 // unhandled mouse event
                 default:

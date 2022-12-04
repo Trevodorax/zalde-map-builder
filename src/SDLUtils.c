@@ -1,20 +1,21 @@
 #include "SDLUtils.h"
 
 int initWindowAndRenderer(
-    WindowAndRenderer_t * createdWindow,
+    windowAndRenderer_t * createdWindow,
     const char * windowTitle,
-    size_t windowSize
+    size_t windowSizeX,
+    size_t windowSizeY
 )
 {
     createdWindow->window = SDL_CreateWindow(
         windowTitle, 
         SDL_WINDOWPOS_CENTERED, 
         SDL_WINDOWPOS_CENTERED, 
-        windowSize, 
-        windowSize, 
+        windowSizeX, 
+        windowSizeY, 
         SDL_WINDOW_SHOWN
     );
-    if(     !createdWindow->window)
+    if(!createdWindow->window)
     {
         fprintf(stderr, "SDL_CreateWindow error : %s", SDL_GetError());
         return -1;

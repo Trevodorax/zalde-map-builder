@@ -4,6 +4,6 @@
 #include <SDL2/SDL.h>
 #include "SDLUtils.h"
 
-int initMainWindow(WindowAndRenderer_t * mainWindow);
+int initMainWindow(windowAndRenderer_t * mainWindow);
 
 #endif
