@@ -7,7 +7,7 @@
 
 # Compiler settings
 CC := gcc
-CFLAGS := -Wall -g
+CFLAGS := -Wall -g -Iinclude
 LIBS:= $(shell sdl2-config --cflags --libs)
 
 # Executable
@@ -29,8 +29,16 @@ SDLUTILSC := src/SDLUtils.c
 WINDOWMANAGERO := build/windowManager.o
 WINDOWMANAGERC := src/windowManager.c
 
+# handling events
+EVENTSO := build/events.o
+EVENTSC := src/events.c
+
+# Button handling
+BUTTONO := build/button.o
+BUTTONC := src/button.c
+
 # Objects string
-OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO)
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -52,10 +60,20 @@ $(SDLUTILSO): $(SDLUTILSC)
 	@mkdir -p build
 	$(CC) -c $(SDLUTILSC) $(CFLAGS) -o $@
 
-# Build SDL utils object
+# Build window manager object
 $(WINDOWMANAGERO): $(WINDOWMANAGERC)
 	@mkdir -p build
 	$(CC) -c $(WINDOWMANAGERC) $(CFLAGS) -o $@
+
+# Build events object
+$(EVENTSO): $(EVENTSC)
+	@mkdir -p build
+	$(CC) -c $(EVENTSC) $(CFLAGS) -o $@
+
+# Build button object
+$(BUTTONO): $(BUTTONC)
+	@mkdir -p build
+	$(CC) -c $(BUTTONC) $(CFLAGS) -o $@
 
 # Clean build
 clean:

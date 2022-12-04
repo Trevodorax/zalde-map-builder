@@ -1,5 +1,1 @@
-#include "../include/main.h"
-
-void printHi() {
-    printf("Hi !");
-}
+#include "utils.h"
