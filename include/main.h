@@ -4,3 +4,4 @@
 #include "windowManager.h"
 #include "typedefs.h"
 #include "SDLUtils.h"
+#include "events.h"

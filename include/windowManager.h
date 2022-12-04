@@ -5,6 +5,5 @@
 #include "SDLUtils.h"
 
 int initMainWindow(WindowAndRenderer_t * mainWindow);
-int initTexturesWindow(WindowAndRenderer_t * texturesWindow);
 
 #endif

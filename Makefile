@@ -29,12 +29,16 @@ SDLUTILSC := src/SDLUtils.c
 WINDOWMANAGERO := build/windowManager.o
 WINDOWMANAGERC := src/windowManager.c
 
+# handling events
+EVENTSO := build/events.o
+EVENTSC := src/events.c
+
 # Button handling
 BUTTONO := build/button.o
 BUTTONC := src/button.c
 
 # Objects string
-OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO)
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -60,6 +64,11 @@ $(SDLUTILSO): $(SDLUTILSC)
 $(WINDOWMANAGERO): $(WINDOWMANAGERC)
 	@mkdir -p build
 	$(CC) -c $(WINDOWMANAGERC) $(CFLAGS) -o $@
+
+# Build events object
+$(EVENTSO): $(EVENTSC)
+	@mkdir -p build
+	$(CC) -c $(EVENTSC) $(CFLAGS) -o $@
 
 # Build button object
 $(BUTTONO): $(BUTTONC)
