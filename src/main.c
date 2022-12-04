@@ -13,16 +13,14 @@ int main(int argc, char *argv[])
     if(clickListeners == NULL)
     {
         fprintf(stderr, "malloc error : %s", SDL_GetError());
-        exitStatus = EXIT_FAILURE;
         goto Quit;
     }
     size_t clickListenersSize = 0;
 
 
-    if(0 != SDL_Init(SDL_INIT_VIDEO))
+    if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
-        exitStatus = EXIT_FAILURE;
         goto Quit;
     }
 
@@ -64,23 +62,23 @@ int main(int argc, char *argv[])
             {
                 // there was an error during the event handling
                 case -1:
-                    exitStatus = EXIT_FAILURE;
                     goto Quit;
                 // event to exit the program
                 case 0:
+                    exitStatus = EXIT_SUCCESS;
                     goto Quit;
                 // the event was handled and there is nothing more to do with it
                 case 1:
-                    continue;
+                    break;
                 // somehow, the function returned something else
                 default:
-                    continue;
+                    fprintf(stderr, "GG romain, you fucked up");    
+                    break;
             }
         }
         SDL_RenderPresent(window1.renderer);
         SDL_Delay(50);
     }
-
     
     exitStatus = EXIT_SUCCESS;
 

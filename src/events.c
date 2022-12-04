@@ -26,16 +26,12 @@ int handleEvent(
                 // press escape to leave the program
                 case SDLK_ESCAPE:
                     return 0;
-                // key that is not handled
-                default:
-                    printf("\nKey pressed: %d", event.key.keysym.sym);
             }
+            break;
         // handle mouse events
         case SDL_MOUSEBUTTONDOWN:
             switch(event.button.button) 
             {
-                
-
                 // handle left click
                 case SDL_BUTTON_LEFT:
                     // get the coords of click
@@ -51,13 +47,7 @@ int handleEvent(
                         }
                     }
                     return 1;
-                // unhandled mouse event
-                default:
-                    return 1;
             }
-        // unhandled event type
-        default:
-            return 1;
     }
     return 1;
 }
