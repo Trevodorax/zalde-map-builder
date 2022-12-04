@@ -1,8 +1,7 @@
-#include "../include/main.h"
+#include "main.h"
 
 int main(int argc, char *argv[])
 {
-    printHi();
     WindowAndRenderer_t window1;
     int exitStatus = EXIT_FAILURE;
 
@@ -12,17 +11,23 @@ int main(int argc, char *argv[])
         goto Quit;
     }
 
-    if(initWindowAndRenderer(&window1, "Window 1", WINDOW_SIZE) != 0) {
+    if(initMainWindow(&window1) != 0)
+    {
         goto Quit;
     }
 
-    if(setBackgroundColor(window1.renderer, red) != 0) {
-        goto Quit;
+    // main loop
+    while(1) {
+        SDL_Event event;
+        while(SDL_PollEvent(&event)) {
+            if(event.type == SDL_QUIT) {
+                goto Quit;
+            }
+        }
+        SDL_RenderPresent(window1.renderer);
+        SDL_Delay(50);
     }
 
-    SDL_RenderPresent(window1.renderer);
-
-    SDL_Delay(3000);
     exitStatus = EXIT_SUCCESS;
 
 Quit:

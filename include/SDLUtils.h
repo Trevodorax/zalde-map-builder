@@ -3,13 +3,11 @@ SDL utils for every little action that might be needed
 Must be very generic and not have anything specific to the game
 */
 
+#ifndef _SDLUTILS_H_
 #define _SDLUTILS_H_
 
 #include <SDL2/SDL.h>
-
-#ifndef _TYPEDEFS_H_
-#include "./typedefs.h"
-#endif
+#include "typedefs.h"
 
 int initWindowAndRenderer(
     WindowAndRenderer_t * createdWindow,
@@ -27,3 +25,4 @@ int setBackgroundColor(
     SDL_Color color
 );
 
+#endif

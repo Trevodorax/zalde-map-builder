@@ -1,4 +1,4 @@
-#include "../include/SDLUtils.h"
+#include "SDLUtils.h"
 
 int initWindowAndRenderer(
     WindowAndRenderer_t * createdWindow,
