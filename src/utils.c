@@ -1,11 +1,27 @@
 #include "utils.h"
 
-int fileExists(const char * fileName) {
-    FILE * file = fopen(fileName, "r");
-    if(file == NULL) {
-        fclose(file)
-        return 0;
-    }
-    fclose(file);
-    return 1;
+FILE * getTileFilePtr(
+    const char letter, 
+    const unsigned short number
+) 
+{
+    // variables that compose the texture file name
+    char textureFileLetter[2] = "?\0";
+    char textureFileNumberString[3];
+
+    // concatenatiuon of all previous variables
+    char textureFileName[30] = "\0";
+
+    // use the values given in params
+    textureFileLetter[0] = letter;
+
+    sprintf(textureFileNumberString, "%hu", number);
+
+    strcat(textureFileName, "assets/tileset/\0");
+    strcat(textureFileName, textureFileLetter);
+    strcat(textureFileName, textureFileNumberString);
+    strcat(textureFileName, ".png\0");
+
+
+    return fopen(textureFileName, "r");
 }

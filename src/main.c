@@ -53,6 +53,8 @@ int main(int argc, char *argv[])
 
     /* ----- END OF TEST ----- */
 
+    initTexturePicker(window1);
+
     // main loop
     while(1) 
     {
@@ -72,13 +74,14 @@ int main(int argc, char *argv[])
                     break;
                 // somehow, the function returned something else
                 default:
-                    fprintf(stderr, "GG romain, you fucked up");    
                     break;
             }
         }
         SDL_RenderPresent(window1.renderer);
         SDL_Delay(50);
     }
+
+    
     
     exitStatus = EXIT_SUCCESS;
 
