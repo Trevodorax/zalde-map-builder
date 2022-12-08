@@ -26,4 +26,9 @@ int setBackgroundColor(
     SDL_Color color
 );
 
+SDL_Texture * getImageTexture(
+    SDL_Renderer * renderer,
+    const char * imageFileName
+);
+
 #endif

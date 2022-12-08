@@ -73,3 +73,32 @@ int setBackgroundColor(
 
     return 0;
 }
+
+SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileName)
+{
+    // load the image to pass into the texture
+    SDL_Surface * imgSurface = NULL;
+
+    // final returned texture
+    SDL_Texture * imgTexture = NULL;
+
+    // get the image surface
+    imgSurface = SDL_LoadBMP(imageFileName);
+    if(NULL == imgSurface)
+    {
+        return NULL;
+    }
+
+    // transform the surface into a texture
+    imgTexture = SDL_CreateTextureFromSurface(renderer, imgSurface);
+    if(imgTexture == NULL)
+    {
+        fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
+        return NULL;
+    }
+
+    // free the surface (it was just to create the texture)
+    SDL_FreeSurface(imgSurface);
+
+    return imgTexture;
+}

@@ -29,31 +29,8 @@ int main(int argc, char *argv[])
         goto Quit;
     }
 
-    /* ----- TESTING ADDING BUTTON FUNCTIONNALITY ----- */
 
-    SDL_Rect buttonRect = {0, 0, 100, 100};
-    int testFunc(int a, int b) {
-        printf("\ntestFunc called with %d and %d", a, b); 
-        return 0;
-    }
-    SDL_Color buttonColor = {0, 255, 0, 255};
-
-
-    if(createButton(
-        buttonRect, 
-        testFunc, 
-        buttonColor, 
-        &clickListeners,
-        &clickListenersSize,
-        window1.renderer
-    ) != 0)
-    {
-        goto Quit;
-    }
-
-    /* ----- END OF TEST ----- */
-
-    initTexturePicker(window1);
+    createTexturePicker(&window1, &clickListeners, &clickListenersSize);
 
     // main loop
     while(1) 

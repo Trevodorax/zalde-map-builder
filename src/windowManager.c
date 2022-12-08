@@ -1,7 +1,7 @@
 #include "windowManager.h"
 
-#define WINDOW_SIZE_X 1025
-#define WINDOW_SIZE_Y 512
+#define WINDOW_SIZE_X 1280
+#define WINDOW_SIZE_Y 640
 
 int initMainWindow(windowAndRenderer_t * mainWindow) 
 {
@@ -9,9 +9,9 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
         return -1;
     }
 
-    SDL_Color red = {255, 0, 0, 255};
+    SDL_Color white = {255, 255, 255, 255};
 
-    if(setBackgroundColor(mainWindow->renderer, red) != 0) {
+    if(setBackgroundColor(mainWindow->renderer, white) != 0) {
         return -1;
     }
 
@@ -19,44 +19,87 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
     return 0;
 }
 
-int initTexturePicker(windowAndRenderer_t mainWindow) 
+int createTexturePicker(
+    windowAndRenderer_t * mainWindow, 
+    clickListener_t ** clickListeners, 
+    size_t * clickListenersSize
+) 
 {
-    char * tileFileName;
-    FILE * tileFile = malloc(sizeof(FILE));
+    
     // variables that compose the texture file name
     char textureFileLetter = 'A';
-    unsigned short textureFileNumber;
 
-    while(textureFileLetter != ('Z' + 1))
-    {
+    // while(textureFileLetter != ('Z' + 1))
+    // {
         
-        textureFileNumber = 1;
+        if(createTexturePickerCategory(
+            mainWindow->renderer, 
+            textureFileLetter, 
+            clickListeners, 
+            clickListenersSize
+        ) != 0) {
+            return -1;
+        }
 
-        while(textureFileNumber < 99)
+        // textureFileLetter++;
+    // }
+
+    return 0;
+}
+
+int createTexturePickerCategory(
+    SDL_Renderer * renderer, 
+    const char categoryLetter,
+    clickListener_t ** clickListeners,
+    size_t * clickListenersSize
+)
+{
+    int i, j;
+    unsigned short textureFileNumber = 1;
+    char * tileFileName;
+    SDL_Texture * tileTexture;
+
+    
+
+    for(i = 0; i < 10; i++)
+    {
+        for(j = 0; j < 10; j++)
         {
-            tileFileName = getTileFileName(textureFileLetter, textureFileNumber);
-            
+            tileFileName = getTileFileName(categoryLetter, textureFileNumber);
 
             // start using the file name here
-            tileFile = fopen(
-                tileFileName,
-                "r"
+            tileTexture = getImageTexture(renderer, tileFileName);
+            if(!tileTexture)
+            {
+                return 0;
+            }
+            printf("\n%c%hu", categoryLetter, textureFileNumber);
+
+            SDL_Rect buttonRect = {i * 64, j * 64, 64, 64};
+            createButton(
+                buttonRect, 
+                buttonCallback,
+                tileTexture,
+                clickListeners,
+                clickListenersSize,
+                renderer
             );
 
-            if(tileFile == NULL) {
-                break;
-            }
-            printf("\n%c%hu", textureFileLetter, textureFileNumber);
-
             // stop using the file name here
+            SDL_DestroyTexture(tileTexture);
             free(tileFileName);
-            fclose(tileFile);
 
             textureFileNumber++;
         }
-
-        textureFileLetter++;
     }
 
+    return 0;
+}
+
+int buttonCallback()
+{
+    // currentTileLetter = newTileLetter;
+    // currentTileNumber = newTileNumber;
+    printf("\n-----Clicked tile");
     return 0;
 }

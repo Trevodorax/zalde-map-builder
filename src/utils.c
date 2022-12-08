@@ -21,7 +21,7 @@ char * getTileFileName(
     strcat(textureFileName, "assets/tileset/\0");
     strcat(textureFileName, textureFileLetter);
     strcat(textureFileName, textureFileNumberString);
-    strcat(textureFileName, ".png\0");
+    strcat(textureFileName, ".bmp\0");
 
 
     // probably won't work, have to make textureFileName a pointer
