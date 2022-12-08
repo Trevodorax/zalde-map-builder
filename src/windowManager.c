@@ -21,6 +21,7 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
 
 int initTexturePicker(windowAndRenderer_t mainWindow) 
 {
+    char * tileFileName;
     FILE * tileFile = malloc(sizeof(FILE));
     // variables that compose the texture file name
     char textureFileLetter = 'A';
@@ -33,14 +34,22 @@ int initTexturePicker(windowAndRenderer_t mainWindow)
 
         while(textureFileNumber < 99)
         {
-            tileFile = getTileFilePtr(textureFileLetter, textureFileNumber);
+            tileFileName = getTileFileName(textureFileLetter, textureFileNumber);
+            
+
+            // start using the file name here
+            tileFile = fopen(
+                tileFileName,
+                "r"
+            );
+
             if(tileFile == NULL) {
                 break;
-            } 
+            }
+            printf("\n%c%hu", textureFileLetter, textureFileNumber);
 
-            // use the file here
-            printf("%c%hu", textureFileLetter, textureFileNumber);
-
+            // stop using the file name here
+            free(tileFileName);
             fclose(tileFile);
 
             textureFileNumber++;

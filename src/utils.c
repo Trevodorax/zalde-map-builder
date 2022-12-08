@@ -1,6 +1,6 @@
 #include "utils.h"
 
-FILE * getTileFilePtr(
+char * getTileFileName(
     const char letter, 
     const unsigned short number
 ) 
@@ -10,7 +10,8 @@ FILE * getTileFilePtr(
     char textureFileNumberString[3];
 
     // concatenatiuon of all previous variables
-    char textureFileName[30] = "\0";
+    char * textureFileName = malloc(30 * sizeof(char));
+    textureFileName[0] = '\0';
 
     // use the values given in params
     textureFileLetter[0] = letter;
@@ -23,5 +24,6 @@ FILE * getTileFilePtr(
     strcat(textureFileName, ".png\0");
 
 
-    return fopen(textureFileName, "r");
+    // probably won't work, have to make textureFileName a pointer
+    return textureFileName;
 }

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-FILE * getTileFilePtr(
+char * getTileFileName(
     const char letter, 
     const unsigned short number
 );
