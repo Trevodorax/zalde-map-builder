@@ -43,7 +43,7 @@ int handleEvent(
                         // if the click was on the click listener, execute the clicklistener's function
                         if(SDL_PointInRect(&clickCoords, &(clickListeners[i].clickZone)))
                         {
-                            clickListeners[i].onClick(clickCoords.x, clickCoords.y);
+                            clickListeners[i].onClick(clickListeners[i].tileLetter, clickListeners[i].tileNumber);
                         }
                     }
                     return 1;

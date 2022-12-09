@@ -21,6 +21,9 @@ int createTexturePickerCategory(
     size_t * clickListenersSize
 );
 
-int buttonCallback();
+void setCurrentTile(
+    const char categoryLetter, 
+    const unsigned short textureFileNumber
+);
 
 #endif

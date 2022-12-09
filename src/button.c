@@ -1,8 +1,11 @@
 #include "button.h"
 
-int createButton(
+// generic button
+int createTilePickButton(
     SDL_Rect buttonRect,
-    int (*callbackFunc)(),
+    void (*callbackFunc)(const char, const unsigned short),
+    char tileLetter,
+    unsigned short tileNumber,
     SDL_Texture * backgroundTexture,
     clickListener_t ** clickListeners,
     size_t * clickListenersSize,
@@ -22,7 +25,6 @@ int createButton(
         setDrawColor(renderer, red);
         SDL_RenderFillRect(renderer, &buttonRect);
     }
-    
 
     SDL_RenderPresent(renderer);
 
@@ -30,9 +32,10 @@ int createButton(
     clickListener_t newClickListener;
     newClickListener.clickZone = buttonRect;
     newClickListener.onClick = callbackFunc;
+    newClickListener.tileLetter = tileLetter;
+    newClickListener.tileNumber = tileNumber;
 
     // add the clickListener to the array of clickListeners
-    printf("Size: %zu", *clickListenersSize);
     *clickListeners = realloc(*clickListeners, ((*clickListenersSize) + 1) * sizeof(clickListener_t));
     if(*clickListeners == NULL)
     {

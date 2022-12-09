@@ -3,9 +3,12 @@
 
 #include <SDL2/SDL.h>
 
+// will contain all possible arguments for a callback function
 typedef struct {
     SDL_Rect clickZone;
-    int (*onClick)();
+    void (*onClick)(const char categoryLetter, const unsigned short textureFileNumber);
+    char tileLetter;
+    unsigned short tileNumber;
 } clickListener_t;
 
 typedef struct {

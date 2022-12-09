@@ -75,9 +75,11 @@ int createTexturePickerCategory(
             }
 
             SDL_Rect buttonRect = {i * 64, j * 64, 64, 64};
-            createButton(
+            createTilePickButton(
                 buttonRect,
-                buttonCallback,
+                setCurrentTile,
+                categoryLetter,
+                textureFileNumber,
                 tileTexture,
                 clickListeners,
                 clickListenersSize,
@@ -95,12 +97,17 @@ int createTexturePickerCategory(
     return 0;
 }
 
-int buttonCallback()
+void setCurrentTile(
+    const char categoryLetter, 
+    const unsigned short textureFileNumber
+)
 {
-    extern char currentTileLetter;
-    currentTileLetter = 'C';
-    extern unsigned short currentTileNumber;
-    currentTileNumber = 4;
     printf("\n-----Clicked tile");
-    return 0;
+
+    extern char currentTileLetter;
+    currentTileLetter = categoryLetter;
+    extern unsigned short currentTileNumber;
+    currentTileNumber = textureFileNumber;
+
+    return;
 }
