@@ -1,9 +1,12 @@
 #include "main.h"
 
+char currentTileLetter;
+unsigned short currentTileNumber;
+
 int main(int argc, char *argv[])
 {
     // main window of the program
-    windowAndRenderer_t window1;
+    windowAndRenderer_t mainWindow;
     // return value of the main function
     int exitStatus = EXIT_FAILURE;
     // current event in each iteration of the program loop
@@ -24,38 +27,18 @@ int main(int argc, char *argv[])
         goto Quit;
     }
 
-    if(initMainWindow(&window1) != 0)
+    if(initMainWindow(&mainWindow) != 0)
     {
         goto Quit;
     }
 
-    /* ----- TESTING ADDING BUTTON FUNCTIONNALITY ----- */
 
-    SDL_Rect buttonRect = {0, 0, 100, 100};
-    int testFunc(int a, int b) {
-        printf("\ntestFunc called with %d and %d", a, b); 
-        return 0;
-    }
-    SDL_Color buttonColor = {0, 255, 0, 255};
-
-
-    if(createButton(
-        buttonRect, 
-        testFunc, 
-        buttonColor, 
-        &clickListeners,
-        &clickListenersSize,
-        window1.renderer
-    ) != 0)
-    {
-        goto Quit;
-    }
-
-    /* ----- END OF TEST ----- */
+    createTexturePicker(&mainWindow, &clickListeners, &clickListenersSize);
 
     // main loop
     while(1) 
     {
+        printf("\nCurrent tile: %c%hu", currentTileLetter, currentTileNumber);
         while(SDL_PollEvent(&event)) 
         {
             switch(handleEvent(event, clickListeners, clickListenersSize))
@@ -72,26 +55,31 @@ int main(int argc, char *argv[])
                     break;
                 // somehow, the function returned something else
                 default:
-                    fprintf(stderr, "GG romain, you fucked up");    
                     break;
             }
         }
-        SDL_RenderPresent(window1.renderer);
-        SDL_Delay(50);
+        SDL_RenderPresent(mainWindow.renderer);
+        SDL_Delay(LOOP_DELAY_MS);
     }
+
+    
     
     exitStatus = EXIT_SUCCESS;
 
 Quit:
-    if(window1.window)
+    if(mainWindow.window)
     {
-        SDL_DestroyWindow(window1.window);
+        SDL_DestroyWindow(mainWindow.window);
     }
-    if(window1.renderer)
+    if(mainWindow.renderer)
     {
-        SDL_DestroyRenderer(window1.renderer);
+        SDL_DestroyRenderer(mainWindow.renderer);
     }
-
+    
+    for(int i = 0; i < clickListenersSize; i++)
+    {
+        free(clickListeners[i].callbackArgs);
+    }
     free(clickListeners);
 
     SDL_Quit();

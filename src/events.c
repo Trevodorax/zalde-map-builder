@@ -43,7 +43,15 @@ int handleEvent(
                         // if the click was on the click listener, execute the clicklistener's function
                         if(SDL_PointInRect(&clickCoords, &(clickListeners[i].clickZone)))
                         {
-                            clickListeners[i].onClick(clickCoords.x, clickCoords.y);
+                            switch(clickListeners[i].callbackType)
+                            {
+                                case 'p':
+                                    clickListeners[i].callback(clickListeners[i].callbackArgs);
+                                    break;
+                                default:
+                                    fprintf(stderr, "Unknown callback type");
+                                    return -1;
+                            }
                         }
                     }
                     return 1;

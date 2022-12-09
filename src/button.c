@@ -1,25 +1,36 @@
 #include "button.h"
 
+// generic button
 int createButton(
     SDL_Rect buttonRect,
-    int (*testFunc)(),
-    SDL_Color buttonColor,
+    void (*callback)(void *),
+    char callbackType,
+    void * callbackArgs,
+    SDL_Texture * backgroundTexture,
     clickListener_t ** clickListeners,
     size_t * clickListenersSize,
     SDL_Renderer * renderer
 )
 {
     // render the button on the window
-    if(setDrawColor(renderer, buttonColor) != 0)
+    if(backgroundTexture != NULL)
     {
-        fprintf(stderr, "setDrawColor error : %s", SDL_GetError());
-        return -1;
-    }
-
-    if(SDL_RenderFillRect(renderer, &buttonRect) != 0)
-    {
-        fprintf(stderr, "SDL_RenderFillRect error : %s", SDL_GetError());
-        return -1;
+        if(SDL_RenderCopy(renderer, backgroundTexture, NULL, &buttonRect) != 0) {
+            fprintf(stderr, "SDL_RenderCopy error : %s", SDL_GetError());
+            return -1;
+        }
+    } else {
+        SDL_Color buttonColor = {0, 0, 255, 255};
+        if(setDrawColor(renderer, buttonColor) != 0)
+        {
+            return -1;
+        }
+        
+        if(SDL_RenderFillRect(renderer, &buttonRect) != 0)
+        {
+            fprintf(stderr, "SDL_RenderFillRect error : %s", SDL_GetError());
+            return -1;
+        }
     }
 
     SDL_RenderPresent(renderer);
@@ -27,10 +38,13 @@ int createButton(
     // create a clickListener with the values given in parameters
     clickListener_t newClickListener;
     newClickListener.clickZone = buttonRect;
-    newClickListener.onClick = testFunc;
+    newClickListener.callback = callback;
+    newClickListener.callbackType = callbackType;
+    newClickListener.callbackArgs = callbackArgs;
+
 
     // add the clickListener to the array of clickListeners
-    *clickListeners = realloc(*clickListeners, (*clickListenersSize) + 1);
+    *clickListeners = realloc(*clickListeners, ((*clickListenersSize) + 1) * sizeof(clickListener_t));
     if(*clickListeners == NULL)
     {
         fprintf(stderr, "realloc error");
