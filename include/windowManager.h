@@ -22,8 +22,7 @@ int createTexturePickerCategory(
 );
 
 void setCurrentTile(
-    const char categoryLetter, 
-    const unsigned short textureFileNumber
+    void * tileInfos
 );
 
 #endif

@@ -1,7 +1,11 @@
 #include "windowManager.h"
 
 #define WINDOW_SIZE_X 1280
-#define WINDOW_SIZE_Y 640
+#define WINDOW_SIZE_Y 660
+
+#define TILE_SECTION_POS_X 10
+#define TILE_SECTION_POS_Y 10
+#define TILE_SIZE 64
 
 int initMainWindow(windowAndRenderer_t * mainWindow) 
 {
@@ -9,9 +13,9 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
         return -1;
     }
 
-    SDL_Color white = {255, 255, 255, 255};
+    SDL_Color backgroundColor = {255, 255, 255, 255};
 
-    if(setBackgroundColor(mainWindow->renderer, white) != 0) {
+    if(setBackgroundColor(mainWindow->renderer, backgroundColor) != 0) {
         return -1;
     }
 
@@ -27,7 +31,7 @@ int createTexturePicker(
 {
     
     // variables that compose the texture file name
-    char textureFileLetter = 'A';
+    char textureFileLetter = 'Q';
 
     // while(textureFileLetter != ('Z' + 1))
     // {
@@ -65,6 +69,17 @@ int createTexturePickerCategory(
     {
         for(j = 0; j < 10; j++)
         {
+            SDL_Delay(3);
+            setCurrentTileArgs_t * tileInfos = malloc(sizeof(setCurrentTileArgs_t));
+            if(tileInfos == NULL)
+            {
+                fprintf(stderr, "malloc error");
+                return -1;
+            }
+
+            tileInfos->tileLetter = categoryLetter;
+            tileInfos->tileNumber = textureFileNumber;
+
             tileFileName = getTileFileName(categoryLetter, textureFileNumber);
 
             // start using the file name here
@@ -74,12 +89,12 @@ int createTexturePickerCategory(
                 return 0;
             }
 
-            SDL_Rect buttonRect = {i * 64, j * 64, 64, 64};
-            createTilePickButton(
+            SDL_Rect buttonRect = {TILE_SECTION_POS_X + (j * TILE_SIZE), TILE_SECTION_POS_X + (i * TILE_SIZE), TILE_SIZE, TILE_SIZE};
+            createButton(
                 buttonRect,
                 setCurrentTile,
-                categoryLetter,
-                textureFileNumber,
+                'p',
+                tileInfos,
                 tileTexture,
                 clickListeners,
                 clickListenersSize,
@@ -98,16 +113,15 @@ int createTexturePickerCategory(
 }
 
 void setCurrentTile(
-    const char categoryLetter, 
-    const unsigned short textureFileNumber
+    void * tileInfos
 )
 {
-    printf("\n-----Clicked tile");
+    setCurrentTileArgs_t * tileInfosStruct = (setCurrentTileArgs_t *) tileInfos;
 
     extern char currentTileLetter;
-    currentTileLetter = categoryLetter;
+    currentTileLetter = tileInfosStruct->tileLetter;
     extern unsigned short currentTileNumber;
-    currentTileNumber = textureFileNumber;
-
+    currentTileNumber = tileInfosStruct->tileNumber;
+    
     return;
 }

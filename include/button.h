@@ -5,11 +5,11 @@
 #include "typedefs.h"
 #include "SDLUtils.h"
 
-int createTilePickButton(
+int createButton(
     SDL_Rect buttonRect,
-    void (*callbackFunc)(const char, const unsigned short),
-    char tileLetter,
-    unsigned short tileNumber,
+    void (*callback)(void *),
+    char callbackType,
+    void * callbackArgs,
     SDL_Texture * backgroundTexture,
     clickListener_t ** clickListeners,
     size_t * clickListenersSize,

@@ -1,11 +1,11 @@
 #include "button.h"
 
 // generic button
-int createTilePickButton(
+int createButton(
     SDL_Rect buttonRect,
-    void (*callbackFunc)(const char, const unsigned short),
-    char tileLetter,
-    unsigned short tileNumber,
+    void (*callback)(void *),
+    char callbackType,
+    void * callbackArgs,
     SDL_Texture * backgroundTexture,
     clickListener_t ** clickListeners,
     size_t * clickListenersSize,
@@ -20,10 +20,17 @@ int createTilePickButton(
             return -1;
         }
     } else {
-        //! no function fail checks
-        SDL_Color red = {255, 0, 0, 255};
-        setDrawColor(renderer, red);
-        SDL_RenderFillRect(renderer, &buttonRect);
+        SDL_Color buttonColor = {0, 0, 255, 255};
+        if(setDrawColor(renderer, buttonColor) != 0)
+        {
+            return -1;
+        }
+        
+        if(SDL_RenderFillRect(renderer, &buttonRect) != 0)
+        {
+            fprintf(stderr, "SDL_RenderFillRect error : %s", SDL_GetError());
+            return -1;
+        }
     }
 
     SDL_RenderPresent(renderer);
@@ -31,9 +38,10 @@ int createTilePickButton(
     // create a clickListener with the values given in parameters
     clickListener_t newClickListener;
     newClickListener.clickZone = buttonRect;
-    newClickListener.onClick = callbackFunc;
-    newClickListener.tileLetter = tileLetter;
-    newClickListener.tileNumber = tileNumber;
+    newClickListener.callback = callback;
+    newClickListener.callbackType = callbackType;
+    newClickListener.callbackArgs = callbackArgs;
+
 
     // add the clickListener to the array of clickListeners
     *clickListeners = realloc(*clickListeners, ((*clickListenersSize) + 1) * sizeof(clickListener_t));
