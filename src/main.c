@@ -1,5 +1,8 @@
 #include "main.h"
 
+char currentTileLetter;
+unsigned short currentTileNumber;
+
 int main(int argc, char *argv[])
 {
     // main window of the program
@@ -35,6 +38,7 @@ int main(int argc, char *argv[])
     // main loop
     while(1) 
     {
+        printf("\nCurrent tile: %c%hu", currentTileLetter, currentTileNumber);
         while(SDL_PollEvent(&event)) 
         {
             switch(handleEvent(event, clickListeners, clickListenersSize))
@@ -55,7 +59,7 @@ int main(int argc, char *argv[])
             }
         }
         SDL_RenderPresent(window1.renderer);
-        SDL_Delay(50);
+        SDL_Delay(LOOP_DELAY_MS);
     }
 
     
