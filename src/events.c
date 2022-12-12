@@ -48,6 +48,8 @@ int handleEvent(
                                 case 'p':
                                     clickListeners[i].callback(clickListeners[i].callbackArgs);
                                     break;
+                                case 'f':
+                                    clickListeners[i].callback(clickListeners[i].callbackArgs);
                                 default:
                                     fprintf(stderr, "Unknown callback type");
                                     return -1;

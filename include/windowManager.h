@@ -11,7 +11,8 @@ int initMainWindow(windowAndRenderer_t * mainWindow);
 int createTexturePicker(
     windowAndRenderer_t * mainWindow, 
     clickListener_t ** clickListeners, 
-    size_t * clickListenersSize
+    size_t * clickListenersSize,
+    char *textureFileLetter
 );
 
 int createTexturePickerCategory(
@@ -23,6 +24,10 @@ int createTexturePickerCategory(
 
 void setCurrentTile(
     void * tileInfos
+);
+
+void setCategorie(
+    void * textureCategorieLetter
 );
 
 #endif

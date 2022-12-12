@@ -17,6 +17,10 @@ typedef struct {
 } setCurrentTileArgs_t;
 
 typedef struct {
+    char navDirection;
+} navDirectionsArgs_t;
+
+typedef struct {
     SDL_Window * window;
     SDL_Renderer * renderer;
 } windowAndRenderer_t;

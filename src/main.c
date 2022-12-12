@@ -2,6 +2,7 @@
 
 char currentTileLetter;
 unsigned short currentTileNumber;
+char textureFileLetter;
 
 int main(int argc, char *argv[])
 {
@@ -13,6 +14,9 @@ int main(int argc, char *argv[])
     SDL_Event event;
     // array of click listeners
     clickListener_t * clickListeners = malloc(0);
+    // File letter for the texture we are on
+    textureFileLetter = 'A';
+
     if(clickListeners == NULL)
     {
         fprintf(stderr, "malloc error : %s", SDL_GetError());
@@ -33,11 +37,12 @@ int main(int argc, char *argv[])
     }
 
 
-    createTexturePicker(&mainWindow, &clickListeners, &clickListenersSize);
+    
 
     // main loop
     while(1) 
     {
+        createTexturePicker(&mainWindow, &clickListeners, &clickListenersSize,&textureFileLetter);
         printf("\nCurrent tile: %c%hu", currentTileLetter, currentTileNumber);
         while(SDL_PollEvent(&event)) 
         {
