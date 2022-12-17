@@ -12,7 +12,7 @@ int createTexturePicker(
     windowAndRenderer_t * mainWindow, 
     clickListener_t ** clickListeners, 
     size_t * clickListenersSize,
-    char *textureFileLetter
+    char textureFileLetter
 );
 
 int createTexturePickerCategory(
@@ -27,7 +27,8 @@ void setCurrentTile(
 );
 
 void setCategorie(
-    void * textureCategorieLetter
+    navDirectionsArgs_t * navDirectionsArgs
+
 );
 
 #endif

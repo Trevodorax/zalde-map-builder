@@ -36,13 +36,13 @@ int main(int argc, char *argv[])
         goto Quit;
     }
 
-
+    createTexturePicker(&mainWindow, &clickListeners, &clickListenersSize, textureFileLetter);
     
 
     // main loop
     while(1) 
     {
-        createTexturePicker(&mainWindow, &clickListeners, &clickListenersSize,&textureFileLetter);
+        
         printf("\nCurrent tile: %c%hu", currentTileLetter, currentTileNumber);
         while(SDL_PollEvent(&event)) 
         {

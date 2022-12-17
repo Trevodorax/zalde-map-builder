@@ -20,31 +20,31 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
     }
 
     SDL_RenderPresent(mainWindow->renderer);
+
+    SDL_Delay(5);
     return 0;
 }
+
+
 
 int createTexturePicker(
     windowAndRenderer_t * mainWindow, 
     clickListener_t ** clickListeners, 
     size_t * clickListenersSize,
-    char *textureFileLetter
+    char textureFileLetter
 ) 
 {
 
-    // while(textureFileLetter != ('Z' + 1))
-    // {
         
         if(createTexturePickerCategory(
             mainWindow->renderer, 
-            *textureFileLetter, 
+            textureFileLetter, 
             clickListeners, 
             clickListenersSize
         ) != 0) {
             return -1;
         }
 
-        // textureFileLetter++;
-    // }
 
     return 0;
 }
@@ -60,11 +60,12 @@ int createTexturePickerCategory(
     unsigned short textureFileNumber = 1;
     char * tileFileName;
     SDL_Texture * tileTexture;
-    SDL_Texture * buttonTexture;
+    SDL_Texture * buttonTextureLeft;
+    SDL_Texture * buttonTextureRight;
 
-    buttonTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, 
+    buttonTextureRight = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, 
                                 SDL_TEXTUREACCESS_TARGET, 10, 10);
-    if(buttonTexture == NULL)
+    if(buttonTextureRight == NULL)
     {
         fprintf(stderr, "Erreur SDL_CreateTexture : %s", SDL_GetError());
         return -1;
@@ -72,41 +73,48 @@ int createTexturePickerCategory(
 
     //We create 2 button to navigate
 
-    SDL_Rect buttonRectCategorieRight = {TILE_SECTION_POS_X+10*TILE_SIZE,TILE_SECTION_POS_Y,TILE_SECTION_POS_X+11*TILE_SIZE,TILE_SECTION_POS_Y+TILE_SIZE};
-    //SDL_Rect buttonRectCategorieLeft = {TILE_SECTION_POS_X+11*TILE_SIZE,TILE_SECTION_POS_Y,TILE_SECTION_POS_X+12*TILE_SIZE,TILE_SECTION_POS_Y+TILE_SIZE};
+    SDL_Rect buttonRectCategorieRight = {TILE_SECTION_POS_X+11*TILE_SIZE,TILE_SECTION_POS_Y,TILE_SIZE,TILE_SIZE};
+    SDL_Rect buttonRectCategorieLeft = {TILE_SECTION_POS_X+10*TILE_SIZE,TILE_SECTION_POS_Y,TILE_SIZE,TILE_SIZE};
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); /* On dessine en violet */
-    SDL_SetRenderTarget(renderer, buttonTexture); /* On va dessiner sur la texture */
-    SDL_RenderFillRect(renderer, &buttonRectCategorieRight);
-    SDL_SetRenderTarget(renderer, NULL);
+    buttonTextureLeft = getImageTexture(renderer, "assets/buttons/left.bmp");
+    buttonTextureRight = getImageTexture(renderer, "assets/buttons/right.bmp");
 
-    navDirectionsArgs_t *navArgs = malloc(sizeof(navDirectionsArgs_t));
-    if(navArgs == NULL)
-        {
-            fprintf(stderr, "malloc error");
-            return -1;
-        }
-    navArgs->navDirection = *"r";
+    navDirectionsArgs_t *navArgsRight = malloc(sizeof(navDirectionsArgs_t));
+    if(navArgsRight == NULL)
+    {
+        fprintf(stderr, "malloc error");
+        return -1;
+    }
+    navArgsRight->navDirection = *"r";
     createButton(
-                buttonRectCategorieRight,
-                setCategorie,
-                'f',
-                navArgs,
-                buttonTexture,
-                clickListeners,
-                clickListenersSize,
-                renderer
-            );
-    // createButton(
-    //             buttonRectCategorieLeft,
-    //             setCategorie,
-    //             'f',
-    //             'r',
-    //             buttonTexture,
-    //             clickListeners,
-    //             clickListenersSize,
-    //             renderer
-    //         );
+        buttonRectCategorieRight,
+        setCategorie,
+        'f',
+        navArgsRight,
+        buttonTextureRight,
+        clickListeners,
+        clickListenersSize,
+        renderer
+    );
+
+    navDirectionsArgs_t *navArgsLeft = malloc(sizeof(navDirectionsArgs_t));
+    if(navArgsLeft == NULL)
+    {
+        fprintf(stderr, "malloc error");
+        return -1;
+    }
+    navArgsLeft->navDirection = *"l";
+
+    createButton(
+        buttonRectCategorieLeft,
+        setCategorie,
+        'f',
+        navArgsLeft,
+        buttonTextureLeft,
+        clickListeners,
+        clickListenersSize,
+        renderer
+    );
 
     for(i = 0; i < 10; i++)
     {
@@ -170,9 +178,10 @@ void setCurrentTile(
 }
 
 void setCategorie(
-    void * textureCategorieLetter
+    navDirectionsArgs_t * navArgs
 )
 {
+    createTexturePicker(navArgs->mainWindow, navArgs->clickListeners, navArgs->clickListenersSize, navArgs->textureCategorieLetter);
     extern char textureFileLetter;
-    textureFileLetter = *((char *)textureCategorieLetter);
+    textureFileLetter = navArgs->textureCategorieLetter;
 }

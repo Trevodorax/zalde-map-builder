@@ -17,7 +17,10 @@ typedef struct {
 } setCurrentTileArgs_t;
 
 typedef struct {
-    char navDirection;
+    char textureCategorieLetter,
+    windowAndRenderer_t * mainWindow,
+    clickListener_t ** clickListeners,
+    size_t * clickListenersSize
 } navDirectionsArgs_t;
 
 typedef struct {
