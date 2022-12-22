@@ -1,5 +1,7 @@
 #include "SDLUtils.h"
 
+
+// create a window and a renderer tied together
 int initWindowAndRenderer(
     windowAndRenderer_t * createdWindow,
     const char * windowTitle,
@@ -35,6 +37,8 @@ int initWindowAndRenderer(
     return 0;
 }
 
+
+// set the draw color of the renderer
 int setDrawColor(
     SDL_Renderer * renderer, 
     SDL_Color color
@@ -55,6 +59,8 @@ int setDrawColor(
     return 0;
 };
 
+
+// set the background color of the renderer
 int setBackgroundColor(
     SDL_Renderer * renderer, 
     SDL_Color color
@@ -74,6 +80,8 @@ int setBackgroundColor(
     return 0;
 }
 
+
+// get a texture from an image file name (bmp)
 SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileName)
 {
     // load the image to pass into the texture
@@ -86,7 +94,6 @@ SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileNam
     imgSurface = SDL_LoadBMP(imageFileName);
     if(NULL == imgSurface)
     {
-        fprintf(stderr, "Error SDL_LoadBMP : %s", SDL_GetError());
         return NULL;
     }
 

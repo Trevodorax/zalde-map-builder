@@ -1,5 +1,6 @@
 #include "texturePicker.h"
 
+// create the texture tiles for a category
 int createTexturePickerCategory(
     SDL_Renderer * renderer, 
     const char categoryLetter,
@@ -19,17 +20,25 @@ int createTexturePickerCategory(
     {
         for(j = 0; j < 10; j++)
         {
-            if(createTile(
-                renderer,
-                categoryLetter,
-                textureFileNumber,
-                clickListeners,
-                clickListenersSize,
-                tileSize,
-                texturePickerPosition,
-                i,
-                j
-            ) != 0) return -1;
+            switch(
+                createTile(
+                    renderer,
+                    categoryLetter,
+                    textureFileNumber,
+                    clickListeners,
+                    clickListenersSize,
+                    tileSize,
+                    texturePickerPosition,
+                    i,
+                    j
+                )
+            )
+            {
+                case -1:
+                    return -1;
+                case 1:
+                    return 0;
+            }
 
             textureFileNumber++;
         }
@@ -38,6 +47,8 @@ int createTexturePickerCategory(
     return 0;
 }
 
+
+// create a tile given a category and a texture file number
 int createTile(
     SDL_Renderer * renderer,
     char categoryLetter,
@@ -64,11 +75,10 @@ int createTile(
 
     tileFileName = getTileFileName(categoryLetter, textureFileNumber);
 
-    // start using the file name here
     tileTexture = getImageTexture(renderer, tileFileName);
     if(!tileTexture)
     {
-        return 0;
+        return 1;
     }
 
     SDL_Rect buttonRectTile = {texturePickerPosition.x + (yTileIndex * tileSize), texturePickerPosition.y + (xTileIndex * tileSize), tileSize, tileSize};
@@ -82,7 +92,6 @@ int createTile(
         renderer
     );
 
-    // stop using the file name here
     SDL_DestroyTexture(tileTexture);
     free(tileFileName);
 
@@ -91,6 +100,8 @@ int createTile(
     return 0;
 }
 
+
+// create the navigation buttons
 int createNavigation(
     SDL_Renderer * renderer,
     clickListener_t ** clickListeners,
@@ -131,6 +142,7 @@ int createNavigation(
 }
 
 
+// create a navigation button given a direction
 int createNavigationButton(
     SDL_Renderer * renderer,
     SDL_Rect buttonRect,
@@ -163,6 +175,8 @@ int createNavigationButton(
     return 0;
 }
 
+
+// set the global value of the current tile
 void setCurrentTile(
     void * tileInfos
 )
@@ -178,6 +192,7 @@ void setCurrentTile(
 }
 
 
+// set the global value of the current tile category
 void setTexturePickerCategory(
     void * args
 )

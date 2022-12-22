@@ -11,4 +11,16 @@ int handleEvent(
     size_t clickListenersSize
 );
 
+void handleMouseEvent(
+    SDL_Event event, 
+    clickListener_t * clickListeners, 
+    size_t clickListenersSize
+);
+
+void handleLeftClick(
+    SDL_Point clickCoords,
+    clickListener_t * clickListeners,
+    size_t clickListenersSize
+);
+
 #endif

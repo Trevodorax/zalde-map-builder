@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     // current event in each iteration of the program loop
     SDL_Event event;
     // array of click listeners
+    // TODO : use a linked list instead of an array 
     clickListener_t * clickListeners = malloc(0);
     // File letter for the texture we are on
     tilePickerLetter = 'A';

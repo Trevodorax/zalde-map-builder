@@ -7,6 +7,8 @@
 #define TILE_SECTION_POS_Y 50
 #define TEXTURE_PICKER_SIZE 512
 
+
+// create the main window and its renderer
 int initMainWindow(windowAndRenderer_t * mainWindow) 
 {
     if(initWindowAndRenderer(mainWindow, "Map builder", WINDOW_SIZE_X, WINDOW_SIZE_Y) != 0) {
@@ -23,7 +25,7 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
 }
 
 
-
+// create the texture picker and navigation buttons
 int createTexturePicker(
     windowAndRenderer_t * mainWindow,
     clickListener_t ** clickListeners,
