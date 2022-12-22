@@ -7,7 +7,6 @@
 typedef struct {
     SDL_Rect clickZone;
     void (*callback)(void *);
-    char callbackType; // 'p': setCurrentTile
     void * callbackArgs;
 } clickListener_t;
 
@@ -17,11 +16,8 @@ typedef struct {
 } setCurrentTileArgs_t;
 
 typedef struct {
-    char textureCategorieLetter,
-    windowAndRenderer_t * mainWindow,
-    clickListener_t ** clickListeners,
-    size_t * clickListenersSize
-} navDirectionsArgs_t;
+    char direction;
+} setTexturePickerCategoryArgs_t;
 
 typedef struct {
     SDL_Window * window;

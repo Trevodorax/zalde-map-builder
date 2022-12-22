@@ -29,6 +29,10 @@ SDLUTILSC := src/SDLUtils.c
 WINDOWMANAGERO := build/windowManager.o
 WINDOWMANAGERC := src/windowManager.c
 
+# managing texture picking
+TEXTUREPICKERO := build/texturePicker.o	
+TEXTUREPICKERC := src/texturePicker.c
+
 # handling events
 EVENTSO := build/events.o
 EVENTSC := src/events.c
@@ -38,7 +42,7 @@ BUTTONO := build/button.o
 BUTTONC := src/button.c
 
 # Objects string
-OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO)
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -64,6 +68,11 @@ $(SDLUTILSO): $(SDLUTILSC)
 $(WINDOWMANAGERO): $(WINDOWMANAGERC)
 	@mkdir -p build
 	$(CC) -c $(WINDOWMANAGERC) $(CFLAGS) -o $@
+
+# Build texture picker object
+$(TEXTUREPICKERO): $(TEXTUREPICKERC)
+	@mkdir -p build
+	$(CC) -c $(TEXTUREPICKERC) $(CFLAGS) -o $@
 
 # Build events object
 $(EVENTSO): $(EVENTSC)

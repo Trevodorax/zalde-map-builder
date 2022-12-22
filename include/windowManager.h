@@ -2,9 +2,7 @@
 #define _WINDOW_MANAGER_H_
 
 #include <SDL2/SDL.h>
-#include "SDLUtils.h"
-#include "utils.h"
-#include "button.h"
+#include "texturePicker.h"
 
 int initMainWindow(windowAndRenderer_t * mainWindow);
 
@@ -13,22 +11,6 @@ int createTexturePicker(
     clickListener_t ** clickListeners, 
     size_t * clickListenersSize,
     char textureFileLetter
-);
-
-int createTexturePickerCategory(
-    SDL_Renderer * renderer, 
-    const char categoryLetter,
-    clickListener_t ** clickListeners,
-    size_t * clickListenersSize
-);
-
-void setCurrentTile(
-    void * tileInfos
-);
-
-void setCategorie(
-    navDirectionsArgs_t * navDirectionsArgs
-
 );
 
 #endif

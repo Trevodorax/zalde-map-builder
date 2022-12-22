@@ -4,7 +4,6 @@
 int createButton(
     SDL_Rect buttonRect,
     void (*callback)(void *),
-    char callbackType,
     void * callbackArgs,
     SDL_Texture * backgroundTexture,
     clickListener_t ** clickListeners,
@@ -33,13 +32,10 @@ int createButton(
         }
     }
 
-    SDL_RenderPresent(renderer);
-
     // create a clickListener with the values given in parameters
     clickListener_t newClickListener;
     newClickListener.clickZone = buttonRect;
     newClickListener.callback = callback;
-    newClickListener.callbackType = callbackType;
     newClickListener.callbackArgs = callbackArgs;
 
 

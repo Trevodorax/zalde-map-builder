@@ -86,6 +86,7 @@ SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileNam
     imgSurface = SDL_LoadBMP(imageFileName);
     if(NULL == imgSurface)
     {
+        fprintf(stderr, "Error SDL_LoadBMP : %s", SDL_GetError());
         return NULL;
     }
 
@@ -93,7 +94,7 @@ SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileNam
     imgTexture = SDL_CreateTextureFromSurface(renderer, imgSurface);
     if(imgTexture == NULL)
     {
-        fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
+        fprintf(stderr, "Error SDL_CreateTextureFromSurface : %s", SDL_GetError());
         return NULL;
     }
 

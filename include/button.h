@@ -8,7 +8,6 @@
 int createButton(
     SDL_Rect buttonRect,
     void (*callback)(void *),
-    char callbackType,
     void * callbackArgs,
     SDL_Texture * backgroundTexture,
     clickListener_t ** clickListeners,

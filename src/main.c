@@ -2,7 +2,7 @@
 
 char currentTileLetter;
 unsigned short currentTileNumber;
-char textureFileLetter;
+char tilePickerLetter;
 
 int main(int argc, char *argv[])
 {
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     // array of click listeners
     clickListener_t * clickListeners = malloc(0);
     // File letter for the texture we are on
-    textureFileLetter = 'A';
+    tilePickerLetter = 'A';
 
     if(clickListeners == NULL)
     {
@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
-        fprintf(stderr, "Erreur SDL_Init : %s", SDL_GetError());
+        fprintf(stderr, "Error SDL_Init : %s", SDL_GetError());
         goto Quit;
     }
 
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
         goto Quit;
     }
 
-    createTexturePicker(&mainWindow, &clickListeners, &clickListenersSize, textureFileLetter);
+    createTexturePicker(&mainWindow, &clickListeners, &clickListenersSize, tilePickerLetter);
     
 
     // main loop
@@ -44,6 +44,7 @@ int main(int argc, char *argv[])
     {
         
         printf("\nCurrent tile: %c%hu", currentTileLetter, currentTileNumber);
+        printf("\nCurrent texture picker: %c", tilePickerLetter);
         while(SDL_PollEvent(&event)) 
         {
             switch(handleEvent(event, clickListeners, clickListenersSize))

@@ -8,4 +8,4 @@
 #include "button.h"
 
 
-#define LOOP_DELAY_MS 50
+#define LOOP_DELAY_MS 500
