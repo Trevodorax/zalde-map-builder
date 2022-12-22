@@ -4,8 +4,7 @@
 int createTexturePickerCategory(
     SDL_Renderer * renderer, 
     const char categoryLetter,
-    clickListener_t ** clickListeners,
-    size_t * clickListenersSize,
+    clickListener_t * clickListeners,
     size_t texturePickerSize,
     SDL_Point texturePickerPosition
 )
@@ -26,7 +25,6 @@ int createTexturePickerCategory(
                     categoryLetter,
                     textureFileNumber,
                     clickListeners,
-                    clickListenersSize,
                     tileSize,
                     texturePickerPosition,
                     i,
@@ -53,8 +51,7 @@ int createTile(
     SDL_Renderer * renderer,
     char categoryLetter,
     unsigned short textureFileNumber,
-    clickListener_t ** clickListeners,
-    size_t * clickListenersSize,
+    clickListener_t * clickListeners,
     size_t tileSize,
     SDL_Point texturePickerPosition,
     int xTileIndex,
@@ -63,15 +60,15 @@ int createTile(
 {
     char * tileFileName;
     SDL_Texture * tileTexture;
-    setCurrentTileArgs_t * tileInfos = malloc(sizeof(setCurrentTileArgs_t));
-    if(tileInfos == NULL)
+    setCurrentTileArgs_t * setCurrentTileArgs = malloc(sizeof(setCurrentTileArgs_t));
+    if(setCurrentTileArgs == NULL)
     {
         fprintf(stderr, "malloc error");
         return -1;
     }
 
-    tileInfos->tileLetter = categoryLetter;
-    tileInfos->tileNumber = textureFileNumber;
+    setCurrentTileArgs->tileLetter = categoryLetter;
+    setCurrentTileArgs->tileNumber = textureFileNumber;
 
     tileFileName = getTileFileName(categoryLetter, textureFileNumber);
 
@@ -85,10 +82,9 @@ int createTile(
     createButton(
         buttonRectTile,
         setCurrentTile,
-        tileInfos,
+        setCurrentTileArgs,
         tileTexture,
         clickListeners,
-        clickListenersSize,
         renderer
     );
 
@@ -104,8 +100,7 @@ int createTile(
 // create the navigation buttons
 int createNavigation(
     SDL_Renderer * renderer,
-    clickListener_t ** clickListeners,
-    size_t * clickListenersSize,
+    clickListener_t * clickListeners,
     SDL_Point navigationPosition
 )
 {
@@ -125,7 +120,6 @@ int createNavigation(
         (SDL_Rect) {navigationPosition.x, navigationPosition.y, 50, 50},
         leftButtonTexture,
         clickListeners,
-        clickListenersSize,
         'l'
     ) != 0 ) return -1;
 
@@ -134,7 +128,6 @@ int createNavigation(
         (SDL_Rect) {navigationPosition.x + 60, navigationPosition.y, 50, 50},
         rightButtonTexture,
         clickListeners,
-        clickListenersSize,
         'r'
     ) != 0 ) return -1;
 
@@ -147,8 +140,7 @@ int createNavigationButton(
     SDL_Renderer * renderer,
     SDL_Rect buttonRect,
     SDL_Texture * buttonTexture,
-    clickListener_t ** clickListeners,
-    size_t * clickListenersSize,
+    clickListener_t * clickListeners,
     char navDirection
 )
 {
@@ -166,7 +158,6 @@ int createNavigationButton(
         callbackArgs,
         buttonTexture,
         clickListeners,
-        clickListenersSize,
         renderer
     ) != 0) return -1;
 
@@ -178,10 +169,10 @@ int createNavigationButton(
 
 // set the global value of the current tile
 void setCurrentTile(
-    void * tileInfos
+    void * args
 )
 {
-    setCurrentTileArgs_t * tileInfosStruct = (setCurrentTileArgs_t *) tileInfos;
+    setCurrentTileArgs_t * tileInfosStruct = (setCurrentTileArgs_t *) args;
 
     extern char currentTileLetter;
     currentTileLetter = tileInfosStruct->tileLetter;

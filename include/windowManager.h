@@ -8,8 +8,7 @@ int initMainWindow(windowAndRenderer_t * mainWindow);
 
 int createTexturePicker(
     windowAndRenderer_t * mainWindow, 
-    clickListener_t ** clickListeners, 
-    size_t * clickListenersSize,
+    clickListener_t * clickListeners, 
     char textureFileLetter
 );
 

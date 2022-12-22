@@ -4,11 +4,13 @@
 #include <SDL2/SDL.h>
 
 // will contain all possible arguments for a callback function
-typedef struct {
+typedef struct clickListener_t clickListener_t;
+struct clickListener_t{
     SDL_Rect clickZone;
     void (*callback)(void *);
     void * callbackArgs;
-} clickListener_t;
+    clickListener_t * next;
+};
 
 typedef struct {
     char tileLetter;

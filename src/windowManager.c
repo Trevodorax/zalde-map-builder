@@ -28,8 +28,7 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
 // create the texture picker and navigation buttons
 int createTexturePicker(
     windowAndRenderer_t * mainWindow,
-    clickListener_t ** clickListeners,
-    size_t * clickListenersSize,
+    clickListener_t * clickListeners,
     char textureFileLetter
 )
 {
@@ -39,7 +38,6 @@ int createTexturePicker(
         mainWindow->renderer, 
         textureFileLetter, 
         clickListeners, 
-        clickListenersSize,
         TEXTURE_PICKER_SIZE,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + 60}
     ) != 0) {
@@ -50,7 +48,6 @@ int createTexturePicker(
     createNavigation(
         mainWindow->renderer,
         clickListeners,
-        clickListenersSize,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y}
     );
 

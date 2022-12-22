@@ -13,8 +13,8 @@ int initWindowAndRenderer(
         windowTitle, 
         SDL_WINDOWPOS_CENTERED, 
         SDL_WINDOWPOS_CENTERED, 
-        windowSizeX, 
-        windowSizeY, 
+        windowSizeX,
+        windowSizeY,
         SDL_WINDOW_SHOWN
     );
     if(!createdWindow->window)

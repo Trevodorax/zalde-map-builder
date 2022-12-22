@@ -13,8 +13,7 @@ int main(int argc, char *argv[])
     // current event in each iteration of the program loop
     SDL_Event event;
     // array of click listeners
-    // TODO : use a linked list instead of an array 
-    clickListener_t * clickListeners = malloc(0);
+    clickListener_t * clickListeners = initClickListeners();
     // File letter for the texture we are on
     tilePickerLetter = 'A';
 
@@ -23,8 +22,6 @@ int main(int argc, char *argv[])
         fprintf(stderr, "malloc error : %s", SDL_GetError());
         goto Quit;
     }
-    size_t clickListenersSize = 0;
-
 
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
@@ -37,18 +34,17 @@ int main(int argc, char *argv[])
         goto Quit;
     }
 
-    createTexturePicker(&mainWindow, &clickListeners, &clickListenersSize, tilePickerLetter);
+    createTexturePicker(&mainWindow, clickListeners, tilePickerLetter);
     
 
     // main loop
     while(1) 
     {
-        
         printf("\nCurrent tile: %c%hu", currentTileLetter, currentTileNumber);
         printf("\nCurrent texture picker: %c", tilePickerLetter);
-        while(SDL_PollEvent(&event)) 
+        while(SDL_PollEvent(&event))
         {
-            switch(handleEvent(event, clickListeners, clickListenersSize))
+            switch(handleEvent(event, clickListeners))
             {
                 // there was an error during the event handling
                 case -1:
@@ -69,8 +65,6 @@ int main(int argc, char *argv[])
         SDL_Delay(LOOP_DELAY_MS);
     }
 
-    
-    
     exitStatus = EXIT_SUCCESS;
 
 Quit:
@@ -83,11 +77,7 @@ Quit:
         SDL_DestroyRenderer(mainWindow.renderer);
     }
     
-    for(int i = 0; i < clickListenersSize; i++)
-    {
-        free(clickListeners[i].callbackArgs);
-    }
-    free(clickListeners);
+    freeClickListeners(clickListeners);
 
     SDL_Quit();
 
