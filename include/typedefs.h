@@ -6,6 +6,7 @@
 // will contain all possible arguments for a callback function
 typedef struct clickListener_t clickListener_t;
 struct clickListener_t{
+    char type;
     SDL_Rect clickZone;
     void (*callback)(void *);
     void * callbackArgs;
@@ -19,6 +20,9 @@ typedef struct {
 
 typedef struct {
     char direction;
+    char * texturePickerCategoryLetter;
+    SDL_Renderer * renderer;
+    clickListener_t * clickListeners;
 } setTexturePickerCategoryArgs_t;
 
 typedef struct {

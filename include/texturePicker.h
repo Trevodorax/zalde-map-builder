@@ -6,10 +6,11 @@
 #include "utils.h"
 #include "SDLUtils.h"
 #include "button.h"
+#include "texturePickerNavigation.h"
 
 int createTexturePickerCategory(
     SDL_Renderer * renderer, 
-    const char categoryLetter,
+    char categoryLetter,
     clickListener_t * clickListeners,
     size_t texturePickerSize,
     SDL_Point texturePickerPosition
@@ -26,26 +27,8 @@ int createTile(
     int yTileIndex
 );
 
-int createNavigation(
-    SDL_Renderer * renderer,
-    clickListener_t * clickListeners,
-    SDL_Point navigationPosition
-);
-
-int createNavigationButton(
-    SDL_Renderer * renderer,
-    SDL_Rect buttonRect,
-    SDL_Texture * buttonTexture,
-    clickListener_t * clickListeners,
-    char navDirection
-);
-
 void setCurrentTile(
     void * tileInfos
-);
-
-void setTexturePickerCategory(
-    void * args
 );
 
 #endif

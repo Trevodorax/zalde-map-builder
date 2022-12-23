@@ -110,3 +110,24 @@ SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileNam
 
     return imgTexture;
 }
+
+// draw a fill rectangle of the given color
+int drawFillRect(
+    SDL_Rect rect,
+    SDL_Color color,
+    SDL_Renderer * renderer
+)
+{
+    if(setDrawColor(renderer, color) != 0)
+    {
+        return -1;
+    }
+
+    if(SDL_RenderFillRect(renderer, &rect) != 0)
+    {
+        fprintf(stderr, "SDL_RenderFillRect error : %s", SDL_GetError());
+        return -1;
+    }
+
+    return 0;
+}

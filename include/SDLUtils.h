@@ -31,4 +31,10 @@ SDL_Texture * getImageTexture(
     const char * imageFileName
 );
 
+int drawFillRect(
+    SDL_Rect rect,
+    SDL_Color color,
+    SDL_Renderer * renderer
+);
+
 #endif

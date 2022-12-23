@@ -6,6 +6,7 @@
 #include "SDLUtils.h"
 #include "events.h"
 #include "button.h"
+#include "clickListeners.h"
 
 
 #define LOOP_DELAY_MS 100

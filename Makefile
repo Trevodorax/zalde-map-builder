@@ -33,16 +33,24 @@ WINDOWMANAGERC := src/windowManager.c
 TEXTUREPICKERO := build/texturePicker.o	
 TEXTUREPICKERC := src/texturePicker.c
 
+# managing the texture category
+TEXTUREPICKERNAVIGATIONO := build/texturePickerNavigation.o	
+TEXTUREPICKERNAVIGATIONC := src/texturePickerNavigation.c
+
 # handling events
 EVENTSO := build/events.o
 EVENTSC := src/events.c
+
+# click listeners
+CLICKLISTENERSO := build/clickListeners.o
+CLICKLISTENERSC := src/clickListeners.c
 
 # Button handling
 BUTTONO := build/button.o
 BUTTONC := src/button.c
 
 # Objects string
-OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO)
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -74,10 +82,20 @@ $(TEXTUREPICKERO): $(TEXTUREPICKERC)
 	@mkdir -p build
 	$(CC) -c $(TEXTUREPICKERC) $(CFLAGS) -o $@
 
+# Build texture picker navigation object
+$(TEXTUREPICKERNAVIGATIONO): $(TEXTUREPICKERNAVIGATIONC)
+	@mkdir -p build
+	$(CC) -c $(TEXTUREPICKERNAVIGATIONC) $(CFLAGS) -o $@
+
 # Build events object
 $(EVENTSO): $(EVENTSC)
 	@mkdir -p build
 	$(CC) -c $(EVENTSC) $(CFLAGS) -o $@
+
+# Build click listeners object
+$(CLICKLISTENERSO): $(CLICKLISTENERSC)
+	@mkdir -p build
+	$(CC) -c $(CLICKLISTENERSC) $(CFLAGS) -o $@
 
 # Build button object
 $(BUTTONO): $(BUTTONC)

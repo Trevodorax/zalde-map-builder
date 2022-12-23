@@ -1,12 +1,5 @@
 #include "windowManager.h"
 
-#define WINDOW_SIZE_X 1280
-#define WINDOW_SIZE_Y 660
-
-#define TILE_SECTION_POS_X 50
-#define TILE_SECTION_POS_Y 50
-#define TEXTURE_PICKER_SIZE 512
-
 
 // create the main window and its renderer
 int initMainWindow(windowAndRenderer_t * mainWindow) 
@@ -29,14 +22,14 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
 int createTexturePicker(
     windowAndRenderer_t * mainWindow,
     clickListener_t * clickListeners,
-    char textureFileLetter
+    char * texturePickerCategoryLetter
 )
 {
 
     // create the category
     if(createTexturePickerCategory(
         mainWindow->renderer, 
-        textureFileLetter, 
+        *texturePickerCategoryLetter, 
         clickListeners, 
         TEXTURE_PICKER_SIZE,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + 60}
@@ -48,6 +41,7 @@ int createTexturePicker(
     createNavigation(
         mainWindow->renderer,
         clickListeners,
+        texturePickerCategoryLetter,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y}
     );
 

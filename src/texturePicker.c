@@ -3,7 +3,7 @@
 // create the texture tiles for a category
 int createTexturePickerCategory(
     SDL_Renderer * renderer, 
-    const char categoryLetter,
+    char categoryLetter,
     clickListener_t * clickListeners,
     size_t texturePickerSize,
     SDL_Point texturePickerPosition
@@ -80,6 +80,7 @@ int createTile(
 
     SDL_Rect buttonRectTile = {texturePickerPosition.x + (yTileIndex * tileSize), texturePickerPosition.y + (xTileIndex * tileSize), tileSize, tileSize};
     createButton(
+        't',
         buttonRectTile,
         setCurrentTile,
         setCurrentTileArgs,
@@ -97,76 +98,6 @@ int createTile(
 }
 
 
-// create the navigation buttons
-int createNavigation(
-    SDL_Renderer * renderer,
-    clickListener_t * clickListeners,
-    SDL_Point navigationPosition
-)
-{
-    SDL_Texture * leftButtonTexture;
-    SDL_Texture * rightButtonTexture;
-
-    leftButtonTexture = getImageTexture(renderer, "assets/buttons/left.bmp");
-    rightButtonTexture = getImageTexture(renderer, "assets/buttons/right.bmp");
-
-    if(!leftButtonTexture || !rightButtonTexture)
-    {
-        return -1;
-    }
-
-    if(createNavigationButton(
-        renderer,
-        (SDL_Rect) {navigationPosition.x, navigationPosition.y, 50, 50},
-        leftButtonTexture,
-        clickListeners,
-        'l'
-    ) != 0 ) return -1;
-
-    if(createNavigationButton(
-        renderer,
-        (SDL_Rect) {navigationPosition.x + 60, navigationPosition.y, 50, 50},
-        rightButtonTexture,
-        clickListeners,
-        'r'
-    ) != 0 ) return -1;
-
-    return 0;
-}
-
-
-// create a navigation button given a direction
-int createNavigationButton(
-    SDL_Renderer * renderer,
-    SDL_Rect buttonRect,
-    SDL_Texture * buttonTexture,
-    clickListener_t * clickListeners,
-    char navDirection
-)
-{
-    setTexturePickerCategoryArgs_t * callbackArgs = malloc(sizeof(setTexturePickerCategoryArgs_t));
-    if(callbackArgs == NULL)
-    {
-        fprintf(stderr, "malloc error");
-        return -1;
-    }
-    callbackArgs->direction = navDirection;
-
-    if(createButton(
-        buttonRect,
-        setTexturePickerCategory,
-        callbackArgs,
-        buttonTexture,
-        clickListeners,
-        renderer
-    ) != 0) return -1;
-
-    SDL_DestroyTexture(buttonTexture);
-
-    return 0;
-}
-
-
 // set the global value of the current tile
 void setCurrentTile(
     void * args
@@ -179,44 +110,5 @@ void setCurrentTile(
     extern unsigned short currentTileNumber;
     currentTileNumber = tileInfosStruct->tileNumber;
     
-    return;
-}
-
-
-// set the global value of the current tile category
-void setTexturePickerCategory(
-    void * args
-)
-{
-    setTexturePickerCategoryArgs_t * callbackArgs = (setTexturePickerCategoryArgs_t *) args;
-
-    extern char tilePickerLetter;
-    if(callbackArgs->direction == 'l')
-    {
-        if(tilePickerLetter == 'A')
-        {
-            tilePickerLetter = 'Z';
-        }
-        else
-        {
-            tilePickerLetter--;
-        }
-    }
-    else if(callbackArgs->direction == 'r')
-    {
-        if(tilePickerLetter == 'Z')
-        {
-            tilePickerLetter = 'A';
-        }
-        else
-        {
-            tilePickerLetter++;
-        }
-    }
-    else
-    {
-        fprintf(stderr, "invalid direction");
-    }
-
     return;
 }
