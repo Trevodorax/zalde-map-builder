@@ -1,5 +1,7 @@
 #include "utils.h"
 
+
+// get the file name of a tile given a letter and a number
 char * getTileFileName(
     const char letter, 
     const unsigned short number
@@ -23,7 +25,5 @@ char * getTileFileName(
     strcat(textureFileName, textureFileNumberString);
     strcat(textureFileName, ".bmp\0");
 
-
-    // probably won't work, have to make textureFileName a pointer
     return textureFileName;
 }

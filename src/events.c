@@ -5,15 +5,11 @@
 0... to exit the program
 1... to do nothing in main
 */
-
 int handleEvent(
     SDL_Event event, 
-    clickListener_t * clickListeners, 
-    size_t clickListenersSize
+    clickListener_t * clickListeners
 ) 
-{   
-    size_t i;
-
+{
     switch(event.type) 
     {
         // handle window exit icon
@@ -30,32 +26,45 @@ int handleEvent(
             break;
         // handle mouse events
         case SDL_MOUSEBUTTONDOWN:
-            switch(event.button.button) 
-            {
-                // handle left click
-                case SDL_BUTTON_LEFT:
-                    // get the coords of click
-                    SDL_Point clickCoords = {event.button.x, event.button.y};
-                    
-                    // check every click listener
-                    for(i = 0; i < clickListenersSize; i++)
-                    {
-                        // if the click was on the click listener, execute the clicklistener's function
-                        if(SDL_PointInRect(&clickCoords, &(clickListeners[i].clickZone)))
-                        {
-                            switch(clickListeners[i].callbackType)
-                            {
-                                case 'p':
-                                    clickListeners[i].callback(clickListeners[i].callbackArgs);
-                                    break;
-                                default:
-                                    fprintf(stderr, "Unknown callback type");
-                                    return -1;
-                            }
-                        }
-                    }
-                    return 1;
-            }
+            handleMouseEvent(event, clickListeners);
+            break;
     }
     return 1;
+}
+
+
+// handle mouse events
+void handleMouseEvent(
+    SDL_Event event, 
+    clickListener_t * clickListeners
+)
+{
+    SDL_Point clickCoords = {event.button.x, event.button.y};
+    switch(event.button.button) 
+    {
+        case SDL_BUTTON_LEFT:
+            handleLeftClick(clickCoords, clickListeners);
+            break;
+    }
+}
+
+
+// handle left clicks
+void handleLeftClick(
+    SDL_Point clickCoords,
+    clickListener_t * clickListeners
+)
+{
+    // check every click listener in the linked list
+    clickListener_t * currentClickListener = clickListeners->next;
+    while(currentClickListener != NULL)
+    {
+        // if the click was on the click listener, execute the clicklistener's function
+        if(SDL_PointInRect(&clickCoords, &(currentClickListener->clickZone)))
+        {
+            currentClickListener->callback(currentClickListener->callbackArgs);
+        }
+        currentClickListener = currentClickListener->next;
+    }
+
 }

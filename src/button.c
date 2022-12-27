@@ -2,13 +2,12 @@
 
 // generic button
 int createButton(
+    char type,
     SDL_Rect buttonRect,
     void (*callback)(void *),
-    char callbackType,
     void * callbackArgs,
     SDL_Texture * backgroundTexture,
-    clickListener_t ** clickListeners,
-    size_t * clickListenersSize,
+    clickListener_t * clickListeners,
     SDL_Renderer * renderer
 )
 {
@@ -33,27 +32,68 @@ int createButton(
         }
     }
 
-    SDL_RenderPresent(renderer);
-
-    // create a clickListener with the values given in parameters
-    clickListener_t newClickListener;
-    newClickListener.clickZone = buttonRect;
-    newClickListener.callback = callback;
-    newClickListener.callbackType = callbackType;
-    newClickListener.callbackArgs = callbackArgs;
-
-
-    // add the clickListener to the array of clickListeners
-    *clickListeners = realloc(*clickListeners, ((*clickListenersSize) + 1) * sizeof(clickListener_t));
-    if(*clickListeners == NULL)
+    // add the button to the click listeners
+    if(addClickListener(
+        type,
+        clickListeners,
+        buttonRect,
+        callback,
+        callbackArgs
+    ) != 0)
     {
-        fprintf(stderr, "realloc error");
         return -1;
     }
 
-    *((*clickListeners) + (*clickListenersSize)) = newClickListener;
+    return 0;
+}
 
-    (*clickListenersSize)++;
+int deleteButtonsByType(
+    char type,
+    SDL_Renderer * renderer,
+    clickListener_t * clickListeners
+)
+{
+    // erase the buttons from the window
+    if(eraseButtonsByType(
+        type,
+        renderer,
+        clickListeners
+    ) != 0)
+    {
+        return -1;
+    }
 
+    // remove the buttons from the click listeners
+    if(removeClickListenersByType(
+        type,
+        clickListeners
+    ) != 0)
+    {
+        return -1;
+    }
+
+    return 0;
+}
+
+// erase all buttons from the window by type
+int eraseButtonsByType(
+    char type,
+    SDL_Renderer * renderer,
+    clickListener_t * clickListeners
+)
+{
+    clickListener_t * currentClickListener = clickListeners->next;
+    while(currentClickListener != NULL)
+    {
+        if(currentClickListener->type == type)
+        {
+            if(drawFillRect(
+                currentClickListener->clickZone,
+                (SDL_Color) {255, 255, 255, 255},
+                renderer
+            ) != 0) return -1;
+        }
+        currentClickListener = currentClickListener->next;
+    }
     return 0;
 }

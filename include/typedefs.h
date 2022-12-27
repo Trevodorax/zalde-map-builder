@@ -4,17 +4,26 @@
 #include <SDL2/SDL.h>
 
 // will contain all possible arguments for a callback function
-typedef struct {
+typedef struct clickListener_t clickListener_t;
+struct clickListener_t{
+    char type;
     SDL_Rect clickZone;
     void (*callback)(void *);
-    char callbackType; // 'p': setCurrentTile
     void * callbackArgs;
-} clickListener_t;
+    clickListener_t * next;
+};
 
 typedef struct {
     char tileLetter;
     unsigned short tileNumber;
 } setCurrentTileArgs_t;
+
+typedef struct {
+    char direction;
+    char * texturePickerCategoryLetter;
+    SDL_Renderer * renderer;
+    clickListener_t * clickListeners;
+} setTexturePickerCategoryArgs_t;
 
 typedef struct {
     SDL_Window * window;

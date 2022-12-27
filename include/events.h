@@ -7,8 +7,17 @@
 
 int handleEvent(
     SDL_Event event, 
-    clickListener_t * clickListeners, 
-    size_t clickListenersSize
+    clickListener_t * clickListeners
+);
+
+void handleMouseEvent(
+    SDL_Event event, 
+    clickListener_t * clickListeners
+);
+
+void handleLeftClick(
+    SDL_Point clickCoords,
+    clickListener_t * clickListeners
 );
 
 #endif

@@ -1,5 +1,7 @@
 #include "SDLUtils.h"
 
+
+// create a window and a renderer tied together
 int initWindowAndRenderer(
     windowAndRenderer_t * createdWindow,
     const char * windowTitle,
@@ -11,8 +13,8 @@ int initWindowAndRenderer(
         windowTitle, 
         SDL_WINDOWPOS_CENTERED, 
         SDL_WINDOWPOS_CENTERED, 
-        windowSizeX, 
-        windowSizeY, 
+        windowSizeX,
+        windowSizeY,
         SDL_WINDOW_SHOWN
     );
     if(!createdWindow->window)
@@ -35,6 +37,8 @@ int initWindowAndRenderer(
     return 0;
 }
 
+
+// set the draw color of the renderer
 int setDrawColor(
     SDL_Renderer * renderer, 
     SDL_Color color
@@ -55,6 +59,8 @@ int setDrawColor(
     return 0;
 };
 
+
+// set the background color of the renderer
 int setBackgroundColor(
     SDL_Renderer * renderer, 
     SDL_Color color
@@ -74,6 +80,8 @@ int setBackgroundColor(
     return 0;
 }
 
+
+// get a texture from an image file name (bmp)
 SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileName)
 {
     // load the image to pass into the texture
@@ -93,7 +101,7 @@ SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileNam
     imgTexture = SDL_CreateTextureFromSurface(renderer, imgSurface);
     if(imgTexture == NULL)
     {
-        fprintf(stderr, "Erreur SDL_CreateTextureFromSurface : %s", SDL_GetError());
+        fprintf(stderr, "Error SDL_CreateTextureFromSurface : %s", SDL_GetError());
         return NULL;
     }
 
@@ -101,4 +109,25 @@ SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileNam
     SDL_FreeSurface(imgSurface);
 
     return imgTexture;
+}
+
+// draw a fill rectangle of the given color
+int drawFillRect(
+    SDL_Rect rect,
+    SDL_Color color,
+    SDL_Renderer * renderer
+)
+{
+    if(setDrawColor(renderer, color) != 0)
+    {
+        return -1;
+    }
+
+    if(SDL_RenderFillRect(renderer, &rect) != 0)
+    {
+        fprintf(stderr, "SDL_RenderFillRect error : %s", SDL_GetError());
+        return -1;
+    }
+
+    return 0;
 }
