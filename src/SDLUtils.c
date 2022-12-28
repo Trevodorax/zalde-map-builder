@@ -37,6 +37,18 @@ int initWindowAndRenderer(
     return 0;
 }
 
+void freeWindowAndRenderer(windowAndRenderer_t * windowAndRenderer)
+{
+    if(windowAndRenderer->window)
+    {
+        SDL_DestroyWindow(windowAndRenderer->window);
+    }
+    if(windowAndRenderer->renderer)
+    {
+        SDL_DestroyRenderer(windowAndRenderer->renderer);
+    }
+}
+
 
 // set the draw color of the renderer
 int setDrawColor(
