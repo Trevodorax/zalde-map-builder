@@ -4,7 +4,7 @@
 int createNavigation(
     SDL_Renderer * renderer,
     clickListener_t * clickListeners,
-    char * texturePickerCategoryLetter,
+    appContext_t * appContext,
     SDL_Point navigationPosition
 )
 {
@@ -25,7 +25,7 @@ int createNavigation(
         leftButtonTexture,
         clickListeners,
         'l',
-        texturePickerCategoryLetter
+        appContext
     ) != 0 ) return -1;
 
     if(createNavigationButton(
@@ -34,7 +34,7 @@ int createNavigation(
         rightButtonTexture,
         clickListeners,
         'r',
-        texturePickerCategoryLetter
+        appContext
     ) != 0 ) return -1;
 
     return 0;
@@ -48,7 +48,7 @@ int createNavigationButton(
     SDL_Texture * buttonTexture,
     clickListener_t * clickListeners,
     char navDirection,
-    char * texturePickerCategoryLetter
+    appContext_t * appContext
 )
 {
     setTexturePickerCategoryArgs_t * callbackArgs = malloc(sizeof(setTexturePickerCategoryArgs_t));
@@ -60,7 +60,7 @@ int createNavigationButton(
     callbackArgs->direction = navDirection;
     callbackArgs->renderer = renderer;
     callbackArgs->clickListeners = clickListeners;
-    callbackArgs->texturePickerCategoryLetter = texturePickerCategoryLetter;
+    callbackArgs->appContext = appContext;
 
     if(createButton(
         'n',
@@ -90,7 +90,7 @@ void setTexturePickerCategory(
     char direction = callbackArgs->direction;
     SDL_Renderer * renderer = callbackArgs->renderer;
     clickListener_t * clickListeners = callbackArgs->clickListeners;
-    char * texturePickerCategoryLetter = callbackArgs->texturePickerCategoryLetter;
+    appContext_t * appContext = callbackArgs->appContext;
 
     // erase the previous texture picker
     if(deleteButtonsByType(
@@ -105,14 +105,14 @@ void setTexturePickerCategory(
     // set the new category letter
     setCategoryLetter(
         direction,
-        texturePickerCategoryLetter
+        appContext
     );
 
     // create the new texture picker
     if(
         createTexturePickerCategory(
             renderer,
-            *texturePickerCategoryLetter,
+            appContext,
             clickListeners,
             TEXTURE_PICKER_SIZE,
             (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + 60}
@@ -129,29 +129,29 @@ void setTexturePickerCategory(
 // sets the category letter to the next or previous one
 void setCategoryLetter(
     char direction,
-    char * categoryLetter
+    appContext_t * appContext
 )
 {
     if(direction == 'l')
     {
-        if(*categoryLetter == 'A')
+        if(appContext->texturePickerLetter == 'A')
         {
-            *categoryLetter = 'Z';
+            appContext->texturePickerLetter = 'Z';
         }
         else
         {
-            *categoryLetter = *categoryLetter - 1;
+            appContext->texturePickerLetter = appContext->texturePickerLetter - 1;
         }
     }
     else if(direction == 'r')
     {
-        if(*categoryLetter == 'Z')
+        if(appContext->texturePickerLetter == 'Z')
         {
-            *categoryLetter = 'A';
+            appContext->texturePickerLetter = 'A';
         }
         else
         {
-            *categoryLetter = *categoryLetter + 1;
+            appContext->texturePickerLetter = appContext->texturePickerLetter + 1;
         }
     }
     else

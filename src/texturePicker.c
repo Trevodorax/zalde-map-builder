@@ -3,7 +3,7 @@
 // create the texture tiles for a category
 int createTexturePickerCategory(
     SDL_Renderer * renderer, 
-    char categoryLetter,
+    appContext_t * appContext,
     clickListener_t * clickListeners,
     size_t texturePickerSize,
     SDL_Point texturePickerPosition
@@ -22,7 +22,7 @@ int createTexturePickerCategory(
             switch(
                 createTile(
                     renderer,
-                    categoryLetter,
+                    appContext,
                     textureFileNumber,
                     clickListeners,
                     tileSize,
@@ -49,7 +49,7 @@ int createTexturePickerCategory(
 // create a tile given a category and a texture file number
 int createTile(
     SDL_Renderer * renderer,
-    char categoryLetter,
+    appContext_t * appContext,
     unsigned short textureFileNumber,
     clickListener_t * clickListeners,
     size_t tileSize,
@@ -67,10 +67,11 @@ int createTile(
         return -1;
     }
 
-    setCurrentTileArgs->tileLetter = categoryLetter;
+    setCurrentTileArgs->tileLetter = appContext->texturePickerLetter;
     setCurrentTileArgs->tileNumber = textureFileNumber;
+    setCurrentTileArgs->appContext = appContext;
 
-    tileFileName = getTileFileName(categoryLetter, textureFileNumber);
+    tileFileName = getTileFileName(appContext->texturePickerLetter, textureFileNumber);
 
     tileTexture = getImageTexture(renderer, tileFileName);
     if(!tileTexture)
@@ -104,11 +105,10 @@ void setCurrentTile(
 )
 {
     setCurrentTileArgs_t * tileInfosStruct = (setCurrentTileArgs_t *) args;
+    appContext_t * appContext = tileInfosStruct->appContext;
 
-    extern char currentTileLetter;
-    currentTileLetter = tileInfosStruct->tileLetter;
-    extern unsigned short currentTileNumber;
-    currentTileNumber = tileInfosStruct->tileNumber;
+    appContext->currentTileLetter = tileInfosStruct->tileLetter;
+    appContext->currentTileNumber = tileInfosStruct->tileNumber;
     
     return;
 }

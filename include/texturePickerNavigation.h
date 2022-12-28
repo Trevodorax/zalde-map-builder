@@ -11,7 +11,7 @@
 int createNavigation(
     SDL_Renderer * renderer,
     clickListener_t * clickListeners,
-    char * texturePickerCategoryLetter,
+    appContext_t * appContext,
     SDL_Point navigationPosition
 );
 
@@ -21,7 +21,7 @@ int createNavigationButton(
     SDL_Texture * buttonTexture,
     clickListener_t * clickListeners,
     char navDirection,
-    char * texturePickerCategoryLetter
+    appContext_t * appContext
 );
 
 void setTexturePickerCategory(
@@ -30,7 +30,7 @@ void setTexturePickerCategory(
 
 void setCategoryLetter(
     char direction,
-    char * categoryLetter
+    appContext_t * appContext
 );
 
 #endif
