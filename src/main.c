@@ -21,11 +21,14 @@ int main(int argc, char *argv[])
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         fprintf(stderr, "Error SDL_Init : %s", SDL_GetError());
+        freeClickListeners(clickListeners);
         return EXIT_FAILURE;
     }
 
     if(initMainWindow(&mainWindow) != 0)
     {
+        freeClickListeners(clickListeners);
+        SDL_Quit();
         return EXIT_FAILURE;
     }
 
@@ -35,6 +38,9 @@ int main(int argc, char *argv[])
         &appContext
     ) != 0)
     {
+        freeClickListeners(clickListeners);
+        freeWindowAndRenderer(&mainWindow);
+        SDL_Quit();
         return EXIT_FAILURE;
     }
     
