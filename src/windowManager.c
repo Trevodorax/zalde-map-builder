@@ -32,7 +32,7 @@ int createTexturePicker(
         appContext, 
         clickListeners, 
         TEXTURE_PICKER_SIZE,
-        (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + 60}
+        (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + NAVIGATION_BUTTON_SIZE + 10}
     ) != 0) {
         return -1;
     }
