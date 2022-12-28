@@ -22,14 +22,14 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
 int createTexturePicker(
     windowAndRenderer_t * mainWindow,
     clickListener_t * clickListeners,
-    char * texturePickerCategoryLetter
+    appContext_t * appContext
 )
 {
 
     // create the category
     if(createTexturePickerCategory(
         mainWindow->renderer, 
-        *texturePickerCategoryLetter, 
+        appContext, 
         clickListeners, 
         TEXTURE_PICKER_SIZE,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + 60}
@@ -41,7 +41,7 @@ int createTexturePicker(
     createNavigation(
         mainWindow->renderer,
         clickListeners,
-        texturePickerCategoryLetter,
+        appContext,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y}
     );
 

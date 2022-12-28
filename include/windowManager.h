@@ -4,13 +4,14 @@
 #include <SDL2/SDL.h>
 #include "texturePicker.h"
 #include "constants.h"
+#include "typedefs.h"
 
 int initMainWindow(windowAndRenderer_t * mainWindow);
 
 int createTexturePicker(
     windowAndRenderer_t * mainWindow,
     clickListener_t * clickListeners,
-    char * texturePickerCategoryLetter
+    appContext_t * appContext
 );
 
 #endif

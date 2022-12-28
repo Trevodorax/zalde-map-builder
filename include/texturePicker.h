@@ -10,7 +10,7 @@
 
 int createTexturePickerCategory(
     SDL_Renderer * renderer, 
-    char categoryLetter,
+    appContext_t * appContext,
     clickListener_t * clickListeners,
     size_t texturePickerSize,
     SDL_Point texturePickerPosition
@@ -18,6 +18,7 @@ int createTexturePickerCategory(
 
 int createTile(
     SDL_Renderer * renderer,
+    appContext_t * appContext,
     char categoryLetter,
     unsigned short textureFileNumber,
     clickListener_t * clickListeners,

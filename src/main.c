@@ -1,9 +1,5 @@
 #include "main.h"
 
-char currentTileLetter;
-unsigned short currentTileNumber;
-char texturePickerLetter;
-
 int main(int argc, char *argv[])
 {
     // main window of the program
@@ -14,8 +10,11 @@ int main(int argc, char *argv[])
     SDL_Event event;
     // array of click listeners
     clickListener_t * clickListeners = initClickListeners();
-    // File letter for the texture we are on
-    texturePickerLetter = 'A';
+
+    appContext_t appContext;
+    appContext.currentTileLetter = '0';
+    appContext.currentTileNumber = 0;
+    appContext.texturePickerLetter = 'A';
 
     if(clickListeners == NULL)
     {
@@ -34,14 +33,18 @@ int main(int argc, char *argv[])
         goto Quit;
     }
 
-    createTexturePicker(&mainWindow, clickListeners, &texturePickerLetter);
+    createTexturePicker(&mainWindow, clickListeners, &appContext);
     
 
     // main loop
     while(1) 
     {
-        printf("\nCurrent tile: %c%hu", currentTileLetter, currentTileNumber);
-        printf("\nCurrent texture picker: %c", texturePickerLetter);
+        // print the app context
+        printf("\n\nApp context :");
+        printf("\ncurrentTileLetter: %c", appContext.currentTileLetter);
+        printf("\ncurrentTileNumber: %d", appContext.currentTileNumber);
+        printf("\ntexturePickerLetter: %c", appContext.texturePickerLetter);
+
         while(SDL_PollEvent(&event))
         {
             switch(handleEvent(event, clickListeners))
