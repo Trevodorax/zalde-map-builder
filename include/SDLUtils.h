@@ -16,6 +16,8 @@ int initWindowAndRenderer(
     size_t windowSizeY
 );
 
+void freeWindowAndRenderer(windowAndRenderer_t * windowAndRenderer);
+
 int setDrawColor(
     SDL_Renderer * renderer, 
     SDL_Color color

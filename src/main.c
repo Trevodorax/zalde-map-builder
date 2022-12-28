@@ -2,13 +2,9 @@
 
 int main(int argc, char *argv[])
 {
-    // main window of the program
     windowAndRenderer_t mainWindow;
-    // return value of the main function
-    int exitStatus = EXIT_FAILURE;
-    // current event in each iteration of the program loop
+    
     SDL_Event event;
-    // array of click listeners
     clickListener_t * clickListeners = initClickListeners();
 
     appContext_t appContext;
@@ -19,24 +15,30 @@ int main(int argc, char *argv[])
     if(clickListeners == NULL)
     {
         fprintf(stderr, "malloc error : %s", SDL_GetError());
-        goto Quit;
+        return EXIT_FAILURE;
     }
 
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         fprintf(stderr, "Error SDL_Init : %s", SDL_GetError());
-        goto Quit;
+        return EXIT_FAILURE;
     }
 
     if(initMainWindow(&mainWindow) != 0)
     {
-        goto Quit;
+        return EXIT_FAILURE;
     }
 
-    createTexturePicker(&mainWindow, clickListeners, &appContext);
+    if(createTexturePicker(
+        &mainWindow,
+        clickListeners,
+        &appContext
+    ) != 0)
+    {
+        return EXIT_FAILURE;
+    }
     
 
-    // main loop
     while(1) 
     {
         // print the app context
@@ -51,11 +53,16 @@ int main(int argc, char *argv[])
             {
                 // there was an error during the event handling
                 case -1:
-                    goto Quit;
+                    freeWindowAndRenderer(&mainWindow);
+                    freeClickListeners(clickListeners);
+                    SDL_Quit();
+                    return EXIT_FAILURE;
                 // event to exit the program
                 case 0:
-                    exitStatus = EXIT_SUCCESS;
-                    goto Quit;
+                    freeWindowAndRenderer(&mainWindow);
+                    freeClickListeners(clickListeners);
+                    SDL_Quit();
+                    return EXIT_SUCCESS;
                 // the event was handled and there is nothing more to do with it
                 case 1:
                     break;
@@ -68,21 +75,5 @@ int main(int argc, char *argv[])
         SDL_Delay(LOOP_DELAY_MS);
     }
 
-    exitStatus = EXIT_SUCCESS;
-
-Quit:
-    if(mainWindow.window)
-    {
-        SDL_DestroyWindow(mainWindow.window);
-    }
-    if(mainWindow.renderer)
-    {
-        SDL_DestroyRenderer(mainWindow.renderer);
-    }
-    
-    freeClickListeners(clickListeners);
-
-    SDL_Quit();
-
-    return exitStatus;
+    return EXIT_SUCCESS;
 }
