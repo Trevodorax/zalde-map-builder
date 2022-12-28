@@ -20,7 +20,7 @@ char * getTileFileName(
 
     sprintf(textureFileNumberString, "%hu", number);
 
-    strcat(textureFileName, "assets/tileset/\0");
+    strcat(textureFileName, PATH_TO_TILESET);
     strcat(textureFileName, textureFileLetter);
     strcat(textureFileName, textureFileNumberString);
     strcat(textureFileName, ".bmp\0");

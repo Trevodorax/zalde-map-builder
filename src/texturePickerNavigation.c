@@ -21,7 +21,7 @@ int createNavigation(
 
     if(createNavigationButton(
         renderer,
-        (SDL_Rect) {navigationPosition.x, navigationPosition.y, 50, 50},
+        (SDL_Rect) {navigationPosition.x, navigationPosition.y, NAVIGATION_BUTTON_SIZE, NAVIGATION_BUTTON_SIZE},
         leftButtonTexture,
         clickListeners,
         'l',
@@ -30,7 +30,7 @@ int createNavigation(
 
     if(createNavigationButton(
         renderer,
-        (SDL_Rect) {navigationPosition.x + 60, navigationPosition.y, 50, 50},
+        (SDL_Rect) {navigationPosition.x + NAVIGATION_BUTTON_SIZE + 10, navigationPosition.y, NAVIGATION_BUTTON_SIZE, NAVIGATION_BUTTON_SIZE},
         rightButtonTexture,
         clickListeners,
         'r',
@@ -63,7 +63,7 @@ int createNavigationButton(
     callbackArgs->appContext = appContext;
 
     if(createButton(
-        'n',
+        BUTTON_TYPE_NAVIGATION,
         buttonRect,
         setTexturePickerCategory,
         callbackArgs,
@@ -94,7 +94,7 @@ void setTexturePickerCategory(
 
     // erase the previous texture picker
     if(deleteButtonsByType(
-        't',
+        BUTTON_TYPE_TEXTURE_PICKER,
         renderer,
         clickListeners
     ) != 0) {

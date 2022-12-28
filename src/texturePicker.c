@@ -13,11 +13,11 @@ int createTexturePickerCategory(
     unsigned short textureFileNumber = 1;
     
     // calculate the size of each tile
-    size_t tileSize = texturePickerSize / 10;
+    size_t tileSize = texturePickerSize / TEXTURE_PICKER_TILES_PER_ROW;
 
-    for(i = 0; i < 10; i++)
+    for(i = 0; i < TEXTURE_PICKER_TILES_PER_ROW; i++)
     {
-        for(j = 0; j < 10; j++)
+        for(j = 0; j < TEXTURE_PICKER_TILES_PER_ROW; j++)
         {
             switch(
                 createTile(
@@ -81,7 +81,7 @@ int createTile(
 
     SDL_Rect buttonRectTile = {texturePickerPosition.x + (yTileIndex * tileSize), texturePickerPosition.y + (xTileIndex * tileSize), tileSize, tileSize};
     createButton(
-        't',
+        BUTTON_TYPE_TEXTURE_PICKER,
         buttonRectTile,
         setCurrentTile,
         setCurrentTileArgs,
