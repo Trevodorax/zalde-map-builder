@@ -23,7 +23,6 @@ int createTexturePickerCategory(
                 createTile(
                     renderer,
                     appContext,
-                    appContext->texturePickerLetter,
                     textureFileNumber,
                     clickListeners,
                     tileSize,
@@ -51,7 +50,6 @@ int createTexturePickerCategory(
 int createTile(
     SDL_Renderer * renderer,
     appContext_t * appContext,
-    char categoryLetter,
     unsigned short textureFileNumber,
     clickListener_t * clickListeners,
     size_t tileSize,
@@ -69,11 +67,11 @@ int createTile(
         return -1;
     }
 
-    setCurrentTileArgs->tileLetter = categoryLetter;
+    setCurrentTileArgs->tileLetter = appContext->texturePickerLetter;
     setCurrentTileArgs->tileNumber = textureFileNumber;
     setCurrentTileArgs->appContext = appContext;
 
-    tileFileName = getTileFileName(categoryLetter, textureFileNumber);
+    tileFileName = getTileFileName(appContext->texturePickerLetter, textureFileNumber);
 
     tileTexture = getImageTexture(renderer, tileFileName);
     if(!tileTexture)
