@@ -2,6 +2,7 @@
 #define _TYPEDEFS_H_
 
 #include <SDL2/SDL.h>
+#include "constants.h"
 
 // will contain all possible arguments for a callback function
 typedef struct clickListener_t clickListener_t;
@@ -14,9 +15,15 @@ struct clickListener_t {
 };
 
 typedef struct {
+    char letter;
+    unsigned short number;
+} texture_t;
+
+typedef struct {
     char currentTileLetter;
     unsigned short currentTileNumber;
     char texturePickerLetter;
+    texture_t map[MAP_SIZE][MAP_SIZE];
 } appContext_t;
 
 typedef struct {
@@ -31,6 +38,13 @@ typedef struct {
     SDL_Renderer * renderer;
     clickListener_t * clickListeners;
 } setTexturePickerCategoryArgs_t;
+
+typedef struct {
+    appContext_t * appContext;
+    size_t x;
+    size_t y;
+    SDL_Renderer * renderer;
+} setMapTileArgs_t;
 
 typedef struct {
     SDL_Window * window;

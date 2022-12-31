@@ -5,6 +5,7 @@
 #include "texturePicker.h"
 #include "constants.h"
 #include "typedefs.h"
+#include "map.h"
 
 int initMainWindow(windowAndRenderer_t * mainWindow);
 
