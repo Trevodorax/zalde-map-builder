@@ -45,5 +45,14 @@ int createTexturePicker(
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y}
     );
 
+    // create the map
+    if(createMap(
+        clickListeners,
+        mainWindow->renderer,
+        appContext
+    ) != 0) {
+        return -1;
+    }
+
     return 0;
 }

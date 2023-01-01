@@ -19,7 +19,7 @@ int createButton(
             return -1;
         }
     } else {
-        SDL_Color buttonColor = {0, 0, 255, 255};
+        SDL_Color buttonColor = {100, 100, 100, 255};
         if(setDrawColor(renderer, buttonColor) != 0)
         {
             return -1;

@@ -12,6 +12,8 @@ int main(int argc, char *argv[])
     appContext.currentTileNumber = 0;
     appContext.texturePickerLetter = 'A';
 
+    initMap(appContext.map);
+
     if(clickListeners == NULL)
     {
         fprintf(stderr, "malloc error : %s", SDL_GetError());
@@ -43,16 +45,11 @@ int main(int argc, char *argv[])
         SDL_Quit();
         return EXIT_FAILURE;
     }
-    
+
 
     while(1) 
     {
-        // print the app context
-        printf("\n\nApp context :");
-        printf("\ncurrentTileLetter: %c", appContext.currentTileLetter);
-        printf("\ncurrentTileNumber: %d", appContext.currentTileNumber);
-        printf("\ntexturePickerLetter: %c", appContext.texturePickerLetter);
-
+        printMap(appContext.map);
         while(SDL_PollEvent(&event))
         {
             switch(handleEvent(event, clickListeners))

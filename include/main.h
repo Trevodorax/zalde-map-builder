@@ -7,6 +7,7 @@
 #include "events.h"
 #include "button.h"
 #include "clickListeners.h"
+#include "map.h"
 
 
 #define LOOP_DELAY_MS 100
