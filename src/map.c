@@ -104,8 +104,25 @@ void setMapTile(void * callbackArgs)
     appContext_t * appContext = args->appContext;
 
     // exit if no tile was selected
-    if(appContext->currentTileLetter == 'A' && appContext->currentTileNumber == 0)
+    if(appContext->currentTileLetter == 'A' && appContext->currentTileNumber == 0 && !appContext->isErasing)
     {
+        return;
+    }
+
+    if(appContext->isErasing)
+    {
+        appContext->map[args->x][args->y].primaryTexture.letter = 'A';
+        appContext->map[args->x][args->y].primaryTexture.number = 0;
+        appContext->map[args->x][args->y].secondaryTexture.letter = 'A';
+        appContext->map[args->x][args->y].secondaryTexture.number = 0;
+
+        if(updateMapTileTexture(
+            args->x,
+            args->y,
+            'A',
+            0,
+            args->renderer
+        ))
         return;
     }
 
@@ -175,11 +192,29 @@ int updateMapTileTexture(
     size_t x, 
     size_t y, 
     char letter, 
-    unsigned short number, 
+    unsigned short number,
     SDL_Renderer * renderer
 )
 {
     SDL_Rect tileRect = getMapTileRect(x, y);
+
+    // if erasing
+    if(letter == 'A' && number == 0)
+    {
+        if(SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255) != 0)
+        {
+            fprintf(stderr, "SDL_SetRenderDrawColor error: %s", SDL_GetError());
+            return -1;
+        }
+
+        if(SDL_RenderFillRect(renderer, &tileRect) != 0)
+        {
+            fprintf(stderr, "SDL_RenderFillRect error: %s", SDL_GetError());
+            return -1;
+        }
+
+        return 0;
+    }
 
     SDL_Texture * tileTexture = getImageTexture(
         renderer, 

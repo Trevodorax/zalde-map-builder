@@ -29,6 +29,7 @@ typedef struct {
     unsigned short currentTileNumber;
     char texturePickerLetter;
     mapTile_t map[MAP_SIZE][MAP_SIZE];
+    int isErasing;
 } appContext_t;
 
 typedef struct {

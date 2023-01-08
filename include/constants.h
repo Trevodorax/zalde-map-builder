@@ -13,6 +13,7 @@
 #define BUTTON_TYPE_TEXTURE_PICKER 't'
 #define BUTTON_TYPE_NAVIGATION 'n'
 #define BUTTON_TYPE_MAP_TILE 'm'
+#define BUTTON_TYPE_ERASE_BUTTON 'e'
 
 #define PATH_TO_TILESET "assets/tileset/"
 
