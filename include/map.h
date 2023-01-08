@@ -7,9 +7,9 @@
 #include "SDLUtils.h"
 #include "utils.h"
 
-void initMap(texture_t map[MAP_SIZE][MAP_SIZE]);
+void initMap(mapTile_t map[MAP_SIZE][MAP_SIZE]);
 
-void printMap(texture_t map[MAP_SIZE][MAP_SIZE]);
+void printMap(mapTile_t map[MAP_SIZE][MAP_SIZE]);
 
 int createMap(
     clickListener_t * clickListeners,
@@ -26,6 +26,8 @@ int createMapTile(
 );
 
 void setMapTile(void * callbackArgs);
+
+int getMapTileType(mapTile_t mapTile);
 
 SDL_Rect getMapTileRect(
     size_t x, 

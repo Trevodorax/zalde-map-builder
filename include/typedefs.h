@@ -20,10 +20,15 @@ typedef struct {
 } texture_t;
 
 typedef struct {
+    texture_t primaryTexture;
+    texture_t secondaryTexture;
+} mapTile_t;
+
+typedef struct {
     char currentTileLetter;
     unsigned short currentTileNumber;
     char texturePickerLetter;
-    texture_t map[MAP_SIZE][MAP_SIZE];
+    mapTile_t map[MAP_SIZE][MAP_SIZE];
 } appContext_t;
 
 typedef struct {
