@@ -20,7 +20,7 @@ int createEraserButton(
 
     if(createButton(
         BUTTON_TYPE_ERASE_BUTTON,
-        (SDL_Rect) {0, 0, 64, 64},
+        (SDL_Rect) {ERASER_POS_X, ERASER_POS_Y, ERASER_BTN_SIZE, ERASER_BTN_SIZE},
         startErasing,
         startErasingArgs,
         buttonTexture,
@@ -39,6 +39,6 @@ void startErasing(void * voidArgs)
     startErasingArgs_t * args = (startErasingArgs_t *) voidArgs;
 
     args->appContext->isErasing = 1;
-    args->appContext->currentTileLetter = 'A';
-    args->appContext->currentTileNumber = 0;
+    args->appContext->currentTileLetter = EMPTY_TEXTURE_CHAR;
+    args->appContext->currentTileNumber = EMPTY_TEXTURE_NUMBER;
 }

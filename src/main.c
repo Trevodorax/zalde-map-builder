@@ -9,8 +9,8 @@ int main(int argc, char *argv[])
 
     appContext_t appContext;
     appContext.currentTileLetter = '0';
-    appContext.currentTileNumber = 0;
-    appContext.texturePickerLetter = 'A';
+    appContext.texturePickerLetter = EMPTY_TEXTURE_CHAR;
+    appContext.currentTileNumber = EMPTY_TEXTURE_NUMBER;
     appContext.isErasing = 0;
 
     initMap(appContext.map);
