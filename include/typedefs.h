@@ -52,6 +52,10 @@ typedef struct {
 } setMapTileArgs_t;
 
 typedef struct {
+    appContext_t * appContext;
+} startErasingArgs_t;
+
+typedef struct {
     SDL_Window * window;
     SDL_Renderer * renderer;
 } windowAndRenderer_t;

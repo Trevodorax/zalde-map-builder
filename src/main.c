@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     appContext.currentTileLetter = '0';
     appContext.currentTileNumber = 0;
     appContext.texturePickerLetter = 'A';
+    appContext.isErasing = 0;
 
     initMap(appContext.map);
 

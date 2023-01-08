@@ -103,6 +103,12 @@ void setMapTile(void * callbackArgs)
 
     appContext_t * appContext = args->appContext;
 
+    // exit if no tile was selected
+    if(appContext->currentTileLetter == 'A' && appContext->currentTileNumber == 0)
+    {
+        return;
+    }
+
     int mapTileType = getMapTileType(appContext->map[args->x][args->y]);
 
     switch(mapTileType)

@@ -107,6 +107,8 @@ void setCurrentTile(
 
     appContext->currentTileLetter = tileInfosStruct->tileLetter;
     appContext->currentTileNumber = tileInfosStruct->tileNumber;
+
+    appContext->isErasing = 0;
     
     return;
 }
