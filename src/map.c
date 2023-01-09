@@ -4,12 +4,12 @@ void initMap(mapTile_t map[MAP_SIZE][MAP_SIZE])
 {
     size_t x, y;
 
-    for(x = 0; x < MAP_SIZE; x++) {
-        for(y = 0; y < MAP_SIZE; y++) {
-            map[y][x].primaryTexture.letter = EMPTY_TEXTURE_CHAR;
-            map[y][x].primaryTexture.number = EMPTY_TEXTURE_NUMBER;
-            map[y][x].secondaryTexture.letter = EMPTY_TEXTURE_CHAR;
-            map[y][x].secondaryTexture.number = EMPTY_TEXTURE_NUMBER;
+    for(y = 0; y < MAP_SIZE; y++) {
+        for(x = 0; x < MAP_SIZE; x++) {
+            map[x][y].primaryTexture.letter = EMPTY_TEXTURE_CHAR;
+            map[x][y].primaryTexture.number = EMPTY_TEXTURE_NUMBER;
+            map[x][y].secondaryTexture.letter = EMPTY_TEXTURE_CHAR;
+            map[x][y].secondaryTexture.number = EMPTY_TEXTURE_NUMBER;
         }
     }
 }
@@ -21,10 +21,10 @@ void printMap(mapTile_t map[MAP_SIZE][MAP_SIZE])
     printf("\n\n");
     printf("--------------------------------------------------------------------------------------------------------------------------------\n");
 
-    for(x = 0; x < MAP_SIZE; x++) {
-        for(y = 0; y < MAP_SIZE; y++) {
-            printf(" %c%hu ", map[y][x].primaryTexture.letter, map[y][x].primaryTexture.number);
-            printf("%c%hu |", map[y][x].secondaryTexture.letter, map[y][x].secondaryTexture.number);
+    for(y = 0; y < MAP_SIZE; y++) {
+        for(x = 0; x < MAP_SIZE; x++) {
+            printf(" %c%hu ", map[x][y].primaryTexture.letter, map[x][y].primaryTexture.number);
+            printf("%c%hu |", map[x][y].secondaryTexture.letter, map[x][y].secondaryTexture.number);
         }
         printf("\n--------------------------------------------------------------------------------------------------------------------------------\n");
     }
@@ -39,11 +39,11 @@ int createMap(
 {
     size_t x, y;
 
-    for(x = 0; x < MAP_SIZE; x++) {
-        for(y = 0; y < MAP_SIZE; y++) {
+    for(y = 0; y < MAP_SIZE; y++) {
+        for(x = 0; x < MAP_SIZE; x++) {
             if(createMapTile(
-                y,
                 x,
+                y,
                 clickListeners,
                 renderer,
                 appContext
