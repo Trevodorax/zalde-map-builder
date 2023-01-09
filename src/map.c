@@ -6,10 +6,10 @@ void initMap(mapTile_t map[MAP_SIZE][MAP_SIZE])
 
     for(i = 0; i < MAP_SIZE; i++) {
         for(j = 0; j < MAP_SIZE; j++) {
-            map[i][j].primaryTexture.letter = 'A';
-            map[i][j].primaryTexture.number = 0;
-            map[i][j].secondaryTexture.letter = 'A';
-            map[i][j].secondaryTexture.number = 0;
+            map[i][j].primaryTexture.letter = EMPTY_TEXTURE_CHAR;
+            map[i][j].primaryTexture.number = EMPTY_TEXTURE_NUMBER;
+            map[i][j].secondaryTexture.letter = EMPTY_TEXTURE_CHAR;
+            map[i][j].secondaryTexture.number = EMPTY_TEXTURE_NUMBER;
         }
     }
 }
@@ -103,6 +103,29 @@ void setMapTile(void * callbackArgs)
 
     appContext_t * appContext = args->appContext;
 
+    // exit if no tile was selected
+    if(appContext->currentTileLetter == EMPTY_TEXTURE_CHAR && appContext->currentTileNumber == 0 && !appContext->isErasing)
+    {
+        return;
+    }
+
+    if(appContext->isErasing)
+    {
+        appContext->map[args->x][args->y].primaryTexture.letter = EMPTY_TEXTURE_CHAR;
+        appContext->map[args->x][args->y].primaryTexture.number = EMPTY_TEXTURE_NUMBER;
+        appContext->map[args->x][args->y].secondaryTexture.letter = EMPTY_TEXTURE_CHAR;
+        appContext->map[args->x][args->y].secondaryTexture.number = EMPTY_TEXTURE_NUMBER;
+
+        if(updateMapTileTexture(
+            args->x,
+            args->y,
+            EMPTY_TEXTURE_CHAR,
+            0,
+            args->renderer
+        ))
+        return;
+    }
+
     int mapTileType = getMapTileType(appContext->map[args->x][args->y]);
 
     switch(mapTileType)
@@ -137,12 +160,12 @@ void setMapTile(void * callbackArgs)
 // 2 - tile full
 int getMapTileType(mapTile_t mapTile)
 {
-    if(mapTile.primaryTexture.letter == 'A' && mapTile.primaryTexture.number == 0)
+    if(mapTile.primaryTexture.letter == EMPTY_TEXTURE_CHAR && mapTile.primaryTexture.number == EMPTY_TEXTURE_NUMBER)
     {
         return 0;
     }
 
-    if(mapTile.secondaryTexture.letter == 'A' && mapTile.secondaryTexture.number == 0)
+    if(mapTile.secondaryTexture.letter == EMPTY_TEXTURE_CHAR && mapTile.secondaryTexture.number == EMPTY_TEXTURE_NUMBER)
     {
         return 1;
     }
@@ -169,11 +192,29 @@ int updateMapTileTexture(
     size_t x, 
     size_t y, 
     char letter, 
-    unsigned short number, 
+    unsigned short number,
     SDL_Renderer * renderer
 )
 {
     SDL_Rect tileRect = getMapTileRect(x, y);
+
+    // if erasing
+    if(letter == EMPTY_TEXTURE_CHAR && number == EMPTY_TEXTURE_NUMBER)
+    {
+        if(SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255) != 0)
+        {
+            fprintf(stderr, "SDL_SetRenderDrawColor error: %s", SDL_GetError());
+            return -1;
+        }
+
+        if(SDL_RenderFillRect(renderer, &tileRect) != 0)
+        {
+            fprintf(stderr, "SDL_RenderFillRect error: %s", SDL_GetError());
+            return -1;
+        }
+
+        return 0;
+    }
 
     SDL_Texture * tileTexture = getImageTexture(
         renderer, 

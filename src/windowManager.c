@@ -54,5 +54,14 @@ int createTexturePicker(
         return -1;
     }
 
+    if(createEraserButton(
+        appContext,
+        mainWindow->renderer,
+        clickListeners
+    ) != 0)
+    {
+        return -1;
+    }
+
     return 0;
 }

@@ -29,6 +29,7 @@ typedef struct {
     unsigned short currentTileNumber;
     char texturePickerLetter;
     mapTile_t map[MAP_SIZE][MAP_SIZE];
+    int isErasing;
 } appContext_t;
 
 typedef struct {
@@ -50,6 +51,10 @@ typedef struct {
     size_t y;
     SDL_Renderer * renderer;
 } setMapTileArgs_t;
+
+typedef struct {
+    appContext_t * appContext;
+} startErasingArgs_t;
 
 typedef struct {
     SDL_Window * window;

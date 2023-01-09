@@ -39,7 +39,11 @@ TEXTUREPICKERNAVIGATIONC := src/texturePickerNavigation.c
 
 # map built
 MAPO := build/map.o
-MAPC := src/map.c	
+MAPC := src/map.c
+
+# map tile eraser
+ERASERO := build/eraser.o
+ERASERC := src/eraser.c
 
 # handling events
 EVENTSO := build/events.o
@@ -54,7 +58,7 @@ BUTTONO := build/button.o
 BUTTONC := src/button.c
 
 # Objects string
-OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO)
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO) $(ERASERO)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -95,6 +99,11 @@ $(TEXTUREPICKERNAVIGATIONO): $(TEXTUREPICKERNAVIGATIONC)
 $(MAPO): $(MAPC)
 	@mkdir -p build
 	$(CC) -c $(MAPC) $(CFLAGS) -o $@
+
+# Build map object
+$(ERASERO): $(ERASERC)
+	@mkdir -p build
+	$(CC) -c $(ERASERC) $(CFLAGS) -o $@
 
 # Build events object
 $(EVENTSO): $(EVENTSC)
