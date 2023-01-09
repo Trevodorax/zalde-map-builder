@@ -7,6 +7,7 @@
 #include "SDLUtils.h"
 #include "button.h"
 #include "texturePickerNavigation.h"
+#include "currentTextureInfo.h"
 
 int createTexturePickerCategory(
     SDL_Renderer * renderer, 

@@ -143,3 +143,44 @@ int drawFillRect(
 
     return 0;
 }
+
+int drawThickRect(
+    SDL_Rect rect,
+    size_t thickness,
+    SDL_Color color,
+    SDL_Renderer * renderer
+)
+{
+    if(SDL_SetRenderDrawColor(
+        renderer,
+        color.r,
+        color.g,
+        color.b,
+        color.a
+    ) != 0)
+    {
+        fprintf(stderr, "SDL_SetRenderDrawColor error : %s", SDL_GetError());
+        return -1;
+    }
+
+    SDL_Rect currentContainerRect;
+
+    for(size_t i = 0; i < thickness; i++)
+    {
+        currentContainerRect.x = rect.x - i;
+        currentContainerRect.y = rect.y - i;
+        currentContainerRect.w = rect.w + 2 * i;
+        currentContainerRect.h = rect.h + 2 * i;
+
+        if(SDL_RenderDrawRect(
+            renderer, 
+            &currentContainerRect
+        ) != 0)
+        {
+            fprintf(stderr, "SDL_RenderDrawRect error : %s", SDL_GetError());
+            return -1;
+        }
+    }
+
+    return 0;
+}

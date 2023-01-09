@@ -68,6 +68,7 @@ int createTile(
     setCurrentTileArgs->tileLetter = appContext->texturePickerLetter;
     setCurrentTileArgs->tileNumber = textureFileNumber;
     setCurrentTileArgs->appContext = appContext;
+    setCurrentTileArgs->renderer = renderer;
 
     tileFileName = getTileFileName(appContext->texturePickerLetter, textureFileNumber);
 
@@ -109,6 +110,14 @@ void setCurrentTile(
     appContext->currentTileNumber = tileInfosStruct->tileNumber;
 
     appContext->isErasing = 0;
+    if(updateCurrentTextureInfo(
+        tileInfosStruct->renderer,
+        tileInfosStruct->tileLetter,
+        tileInfosStruct->tileNumber
+    ) != 0)
+    {
+        fprintf(stderr, "updateCurrentTextureInfo error");
+    }
     
     return;
 }

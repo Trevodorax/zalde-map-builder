@@ -7,6 +7,7 @@
 #include "typedefs.h"
 #include "map.h"
 #include "eraser.h"
+#include "currentTextureInfo.h"
 
 int initMainWindow(windowAndRenderer_t * mainWindow);
 

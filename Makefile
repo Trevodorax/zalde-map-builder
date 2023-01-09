@@ -37,6 +37,10 @@ TEXTUREPICKERC := src/texturePicker.c
 TEXTUREPICKERNAVIGATIONO := build/texturePickerNavigation.o	
 TEXTUREPICKERNAVIGATIONC := src/texturePickerNavigation.c
 
+# managing the texture category
+CURRENTTEXTUREINFOO := build/currentTextureInfo.o	
+CURRENTTEXTUREINFOC := src/currentTextureInfo.c
+
 # map built
 MAPO := build/map.o
 MAPC := src/map.c
@@ -58,7 +62,7 @@ BUTTONO := build/button.o
 BUTTONC := src/button.c
 
 # Objects string
-OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO) $(ERASERO)
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO) $(ERASERO) $(CURRENTTEXTUREINFOC)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -94,6 +98,12 @@ $(TEXTUREPICKERO): $(TEXTUREPICKERC)
 $(TEXTUREPICKERNAVIGATIONO): $(TEXTUREPICKERNAVIGATIONC)
 	@mkdir -p build
 	$(CC) -c $(TEXTUREPICKERNAVIGATIONC) $(CFLAGS) -o $@
+
+# Build texture info object
+$(CURRENTTEXTUREO): $(CURRENTTEXTUREC)
+	@mkdir -p build
+	$(CC) -c $(CURRENTTEXTUREC) $(CFLAGS) -o $@
+
 
 # Build map object
 $(MAPO): $(MAPC)
