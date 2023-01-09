@@ -2,14 +2,14 @@
 
 void initMap(mapTile_t map[MAP_SIZE][MAP_SIZE])
 {
-    size_t i, j;
+    size_t x, y;
 
-    for(i = 0; i < MAP_SIZE; i++) {
-        for(j = 0; j < MAP_SIZE; j++) {
-            map[i][j].primaryTexture.letter = EMPTY_TEXTURE_CHAR;
-            map[i][j].primaryTexture.number = EMPTY_TEXTURE_NUMBER;
-            map[i][j].secondaryTexture.letter = EMPTY_TEXTURE_CHAR;
-            map[i][j].secondaryTexture.number = EMPTY_TEXTURE_NUMBER;
+    for(x = 0; x < MAP_SIZE; x++) {
+        for(y = 0; y < MAP_SIZE; y++) {
+            map[y][x].primaryTexture.letter = EMPTY_TEXTURE_CHAR;
+            map[y][x].primaryTexture.number = EMPTY_TEXTURE_NUMBER;
+            map[y][x].secondaryTexture.letter = EMPTY_TEXTURE_CHAR;
+            map[y][x].secondaryTexture.number = EMPTY_TEXTURE_NUMBER;
         }
     }
 }
@@ -37,13 +37,13 @@ int createMap(
     appContext_t * appContext
 )
 {
-    size_t i, j;
+    size_t x, y;
 
-    for(i = 0; i < MAP_SIZE; i++) {
-        for(j = 0; j < MAP_SIZE; j++) {
+    for(x = 0; x < MAP_SIZE; x++) {
+        for(y = 0; y < MAP_SIZE; y++) {
             if(createMapTile(
-                i,
-                j,
+                y,
+                x,
                 clickListeners,
                 renderer,
                 appContext
