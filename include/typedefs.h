@@ -36,6 +36,7 @@ typedef struct {
     char tileLetter;
     unsigned short tileNumber;
     appContext_t * appContext;
+    SDL_Renderer * renderer;
 } setCurrentTileArgs_t;
 
 typedef struct {

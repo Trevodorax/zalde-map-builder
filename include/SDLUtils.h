@@ -39,4 +39,11 @@ int drawFillRect(
     SDL_Renderer * renderer
 );
 
+int drawThickRect(
+    SDL_Rect rect,
+    size_t thickness,
+    SDL_Color color,
+    SDL_Renderer * renderer
+);
+
 #endif

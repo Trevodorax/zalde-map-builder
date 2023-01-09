@@ -60,6 +60,13 @@ int createTexturePicker(
         clickListeners
     ) != 0)
     {
+        fprintf(stderr, "createEraserButton error");
+    }
+    if(createCurrentTextureInfo(
+        mainWindow->renderer
+    ) != 0)
+    {
+        fprintf(stderr, "createCurrentTextureInfo error");
         return -1;
     }
 
