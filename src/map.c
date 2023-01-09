@@ -2,29 +2,29 @@
 
 void initMap(mapTile_t map[MAP_SIZE][MAP_SIZE])
 {
-    size_t i, j;
+    size_t x, y;
 
-    for(i = 0; i < MAP_SIZE; i++) {
-        for(j = 0; j < MAP_SIZE; j++) {
-            map[i][j].primaryTexture.letter = EMPTY_TEXTURE_CHAR;
-            map[i][j].primaryTexture.number = EMPTY_TEXTURE_NUMBER;
-            map[i][j].secondaryTexture.letter = EMPTY_TEXTURE_CHAR;
-            map[i][j].secondaryTexture.number = EMPTY_TEXTURE_NUMBER;
+    for(y = 0; y < MAP_SIZE; y++) {
+        for(x = 0; x < MAP_SIZE; x++) {
+            map[x][y].primaryTexture.letter = EMPTY_TEXTURE_CHAR;
+            map[x][y].primaryTexture.number = EMPTY_TEXTURE_NUMBER;
+            map[x][y].secondaryTexture.letter = EMPTY_TEXTURE_CHAR;
+            map[x][y].secondaryTexture.number = EMPTY_TEXTURE_NUMBER;
         }
     }
 }
 
 void printMap(mapTile_t map[MAP_SIZE][MAP_SIZE])
 {
-    size_t i, j;
+    size_t x, y;
 
     printf("\n\n");
     printf("--------------------------------------------------------------------------------------------------------------------------------\n");
 
-    for(i = 0; i < MAP_SIZE; i++) {
-        for(j = 0; j < MAP_SIZE; j++) {
-            printf(" %c%hu ", map[i][j].primaryTexture.letter, map[i][j].primaryTexture.number);
-            printf("%c%hu |", map[i][j].secondaryTexture.letter, map[i][j].secondaryTexture.number);
+    for(y = 0; y < MAP_SIZE; y++) {
+        for(x = 0; x < MAP_SIZE; x++) {
+            printf(" %c%hu ", map[x][y].primaryTexture.letter, map[x][y].primaryTexture.number);
+            printf("%c%hu |", map[x][y].secondaryTexture.letter, map[x][y].secondaryTexture.number);
         }
         printf("\n--------------------------------------------------------------------------------------------------------------------------------\n");
     }
@@ -37,13 +37,13 @@ int createMap(
     appContext_t * appContext
 )
 {
-    size_t i, j;
+    size_t x, y;
 
-    for(i = 0; i < MAP_SIZE; i++) {
-        for(j = 0; j < MAP_SIZE; j++) {
+    for(y = 0; y < MAP_SIZE; y++) {
+        for(x = 0; x < MAP_SIZE; x++) {
             if(createMapTile(
-                i,
-                j,
+                x,
+                y,
                 clickListeners,
                 renderer,
                 appContext
