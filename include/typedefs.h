@@ -22,6 +22,7 @@ typedef struct {
 typedef struct {
     texture_t primaryTexture;
     texture_t secondaryTexture;
+    int isLinkedMap;
 } mapTile_t;
 
 typedef struct {
@@ -56,6 +57,10 @@ typedef struct {
 typedef struct {
     appContext_t * appContext;
 } startErasingArgs_t;
+
+typedef struct {
+    appContext_t * appContext;
+} saveMapArgs_t;
 
 typedef struct {
     SDL_Window * window;

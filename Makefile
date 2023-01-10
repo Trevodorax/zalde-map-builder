@@ -49,6 +49,10 @@ MAPC := src/map.c
 ERASERO := build/eraser.o
 ERASERC := src/eraser.c
 
+# map file builder
+MAPFILEGENERATORO := build/mapFileGenerator.o
+MAPFILEGENERATORC := src/mapFileGenerator.c
+
 # handling events
 EVENTSO := build/events.o
 EVENTSC := src/events.c
@@ -62,7 +66,7 @@ BUTTONO := build/button.o
 BUTTONC := src/button.c
 
 # Objects string
-OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO) $(ERASERO) $(CURRENTTEXTUREINFOC)
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO) $(ERASERO) $(CURRENTTEXTUREINFOC) $(MAPFILEGENERATORO)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -104,7 +108,6 @@ $(CURRENTTEXTUREO): $(CURRENTTEXTUREC)
 	@mkdir -p build
 	$(CC) -c $(CURRENTTEXTUREC) $(CFLAGS) -o $@
 
-
 # Build map object
 $(MAPO): $(MAPC)
 	@mkdir -p build
@@ -114,6 +117,11 @@ $(MAPO): $(MAPC)
 $(ERASERO): $(ERASERC)
 	@mkdir -p build
 	$(CC) -c $(ERASERC) $(CFLAGS) -o $@
+
+# Build map file generator object
+$(MAPFILEGENERATORO): $(MAPFILEGENERATORC)
+	@mkdir -p build
+	$(CC) -c $(MAPFILEGENERATORC) $(CFLAGS) -o $@
 
 # Build events object
 $(EVENTSO): $(EVENTSC)
