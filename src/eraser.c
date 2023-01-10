@@ -35,7 +35,7 @@ int createEraserButton(
 }
 
 void startErasing(void * voidArgs)
-{ 
+{
     startErasingArgs_t * args = (startErasingArgs_t *) voidArgs;
 
     args->appContext->isErasing = 1;

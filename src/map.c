@@ -10,6 +10,7 @@ void initMap(mapTile_t map[MAP_SIZE][MAP_SIZE])
             map[x][y].primaryTexture.number = EMPTY_TEXTURE_NUMBER;
             map[x][y].secondaryTexture.letter = EMPTY_TEXTURE_CHAR;
             map[x][y].secondaryTexture.number = EMPTY_TEXTURE_NUMBER;
+            map[x][y].isLinkedMap = 0;
         }
     }
 }
