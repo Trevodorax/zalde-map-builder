@@ -8,7 +8,7 @@
 # Compiler settings
 CC := gcc
 CFLAGS := -Wall -g -Iinclude
-LIBS:= $(shell sdl2-config --cflags --libs)
+LIBS:= $(shell sdl2-config --cflags --libs) -lSDL2_ttf
 
 # Executable
 EXE := bin/index
@@ -28,6 +28,14 @@ SDLUTILSC := src/SDLUtils.c
 # Handling 2 windows and the communication between them
 WINDOWMANAGERO := build/windowManager.o
 WINDOWMANAGERC := src/windowManager.c
+
+# Handling text input from the user
+TEXTINPUTO := build/textInput.o
+TEXTINPUTC := src/textInput.c
+
+# Handling text input box
+TEXTINPUTBOXO := build/textInputBox.o
+TEXTINPUTBOXC := src/textInputBox.c
 
 # managing texture picking
 TEXTUREPICKERO := build/texturePicker.o	
@@ -66,7 +74,7 @@ BUTTONO := build/button.o
 BUTTONC := src/button.c
 
 # Objects string
-OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO) $(ERASERO) $(CURRENTTEXTUREINFOC) $(MAPFILEGENERATORO)
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(TEXTINPUTO) $(TEXTINPUTBOXO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO) $(ERASERO) $(CURRENTTEXTUREINFOC) $(MAPFILEGENERATORO)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -92,6 +100,16 @@ $(SDLUTILSO): $(SDLUTILSC)
 $(WINDOWMANAGERO): $(WINDOWMANAGERC)
 	@mkdir -p build
 	$(CC) -c $(WINDOWMANAGERC) $(CFLAGS) -o $@
+
+# Build text input object
+$(TEXTINPUTO): $(TEXTINPUTC)
+	@mkdir -p build
+	$(CC) -c $(TEXTINPUTC) $(CFLAGS) -o $@
+
+# Build text input box object
+$(TEXTINPUTBOXO): $(TEXTINPUTBOXC)
+	@mkdir -p build
+	$(CC) -c $(TEXTINPUTBOXC) $(CFLAGS) -o $@
 
 # Build texture picker object
 $(TEXTUREPICKERO): $(TEXTUREPICKERC)

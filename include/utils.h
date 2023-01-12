@@ -11,4 +11,7 @@ char * getTileFileName(
     const unsigned short number
 );
 
+int isLetter(
+    char c
+);
 #endif
