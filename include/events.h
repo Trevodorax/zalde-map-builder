@@ -5,6 +5,7 @@
 
 #include "typedefs.h"
 #include "utils.h"
+#include "textInput.h"
 
 int handleEvent(
     SDL_Event event, 

@@ -2,7 +2,7 @@
 
 
 
-int handlelKeydown(
+int handleKeydown(
     SDL_Event event,
     sizedString_t * text,
     char inputContext
@@ -23,6 +23,8 @@ int handlelKeydown(
     {
         writeLetter(event.key.keysym.sym, text);
     }
+
+    return 0;
 }
 
 int writeLetter(
@@ -70,4 +72,5 @@ int enterValue(
         case '0':
             return 0;
     }
+    return 0;
 }

@@ -23,11 +23,13 @@ int handleEvent(
             }
 
             // handle the text input
-            handleKeydown(
+            if(handleKeydown(
                 event,
                 appContext->inputText,
                 appContext->inputContext
-            );
+            )!= 0){
+                return -1;
+            }
             break;
         // handle mouse events
         case SDL_MOUSEBUTTONDOWN:

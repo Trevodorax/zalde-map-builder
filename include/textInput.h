@@ -7,4 +7,23 @@
 #include "utils.h"
 #include "typedefs.h"
 
+int handleKeydown(
+    SDL_Event event,
+    sizedString_t * text,
+    char inputContext
+);
+
+int writeLetter(
+    char letter,
+    sizedString_t * text
+);
+
+int deleteLetter(
+    sizedString_t * text
+);
+
+int enterValue(
+    sizedString_t * string,
+    char inputContext
+);
 #endif

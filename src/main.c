@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
     appContext.currentTileNumber = EMPTY_TEXTURE_NUMBER;
     appContext.isErasing = 0;
     appContext.inputContext = '0';
+    appContext.inputText = malloc(sizeof(sizedString_t));
     appContext.inputText->string = malloc(sizeof(char) * 1);
     appContext.inputText->string[0] = '\0';
     appContext.inputText->size = 1;
