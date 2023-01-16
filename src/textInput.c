@@ -23,7 +23,6 @@ int handleKeydown(
     {
         writeLetter(event.key.keysym.sym, text);
     }
-
     return 0;
 }
 
@@ -64,12 +63,13 @@ int deleteLetter(
 }
 
 int enterValue(
-    sizedString_t * string,
+    sizedString_t * text,
     char inputContext
 )
 {
     switch(inputContext){
         case '0':
+            printf("text : %s", text->string);
             return 0;
     }
     return 0;

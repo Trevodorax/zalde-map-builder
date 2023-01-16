@@ -23,7 +23,7 @@ int deleteLetter(
 );
 
 int enterValue(
-    sizedString_t * string,
+    sizedString_t * text,
     char inputContext
 );
 #endif

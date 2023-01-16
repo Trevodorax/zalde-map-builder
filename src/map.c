@@ -17,19 +17,19 @@ void initMap(mapTile_t map[MAP_SIZE][MAP_SIZE])
 
 void printMap(mapTile_t map[MAP_SIZE][MAP_SIZE])
 {
-    size_t x, y;
+    // size_t x, y;
 
-    printf("\n\n");
-    printf("--------------------------------------------------------------------------------------------------------------------------------\n");
+    // printf("\n\n");
+    // printf("--------------------------------------------------------------------------------------------------------------------------------\n");
 
-    for(y = 0; y < MAP_SIZE; y++) {
-        for(x = 0; x < MAP_SIZE; x++) {
-            printf(" %c%hu ", map[x][y].primaryTexture.letter, map[x][y].primaryTexture.number);
-            printf("%c%hu |", map[x][y].secondaryTexture.letter, map[x][y].secondaryTexture.number);
-        }
-        printf("\n--------------------------------------------------------------------------------------------------------------------------------\n");
-    }
-    printf("\n\n");
+    // for(y = 0; y < MAP_SIZE; y++) {
+    //     for(x = 0; x < MAP_SIZE; x++) {
+    //         printf(" %c%hu ", map[x][y].primaryTexture.letter, map[x][y].primaryTexture.number);
+    //         printf("%c%hu |", map[x][y].secondaryTexture.letter, map[x][y].secondaryTexture.number);
+    //     }
+    //     printf("\n--------------------------------------------------------------------------------------------------------------------------------\n");
+    // }
+    // printf("\n\n");
 }
 
 int createMap(
