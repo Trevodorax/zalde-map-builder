@@ -6,30 +6,26 @@
 
 #include "typedefs.h"
 #include "SDLUtils.h"
-
-#define LETTER_SIZE 10
-
+#include "constants.h"
 
 int initTextInputBox(
     SDL_Renderer * renderer, 
-    appContext_t * appContext,
-    size_t inputBoxSizeX,
-    size_t inputBoxSizeY,
-    SDL_Point textInputBoxPosition
+    appContext_t * appContext
 );
 
 int displayTextInputBoxValue(
     SDL_Renderer * renderer,
-    appContext_t * appContext,
-    size_t inputBoxSizeX,
-    size_t inputBoxSizeY,
-    SDL_Point textInputBoxPosition
+    appContext_t * appContext
 );
 
-int addSurfaceToRenderer(
+int renderInputBox(
     appContext_t * appContext,
     SDL_Renderer * renderer,
     SDL_Rect * rect
+);
+
+int eraseInputBox(
+    SDL_Renderer * renderer
 );
 
 #endif

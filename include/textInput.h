@@ -6,24 +6,28 @@
 #include <SDL2/SDL_ttf.h>
 #include "utils.h"
 #include "typedefs.h"
+#include "textInputBox.h"
 
 int handleKeydown(
     SDL_Event event,
-    sizedString_t * text,
-    char inputContext
+    appContext_t * appContext,
+    SDL_Renderer * renderer
 );
 
 int writeLetter(
     char letter,
-    sizedString_t * text
+    appContext_t * appContext,
+    SDL_Renderer * renderer
 );
 
 int deleteLetter(
-    sizedString_t * text
+    appContext_t * appContext,
+    SDL_Renderer * renderer
+    
 );
 
 int enterValue(
-    sizedString_t * text,
-    char inputContext
+    appContext_t * appContext,
+    SDL_Renderer * renderer
 );
 #endif

@@ -9,6 +9,7 @@
 #include "eraser.h"
 #include "currentTextureInfo.h"
 #include "mapFileGenerator.h"
+#include "textInputBox.h"
 
 int initMainWindow(windowAndRenderer_t * mainWindow);
 

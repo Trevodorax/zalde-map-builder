@@ -10,7 +10,8 @@
 int handleEvent(
     SDL_Event event, 
     clickListener_t * clickListeners,
-    appContext_t * appContext
+    appContext_t * appContext,
+    SDL_Renderer * renderer
 );
 
 void handleMouseEvent(

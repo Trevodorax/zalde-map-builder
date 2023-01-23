@@ -8,7 +8,8 @@
 int handleEvent(
     SDL_Event event, 
     clickListener_t * clickListeners,
-    appContext_t * appContext
+    appContext_t * appContext,
+    SDL_Renderer * renderer
 )
 {
     switch(event.type)
@@ -25,8 +26,8 @@ int handleEvent(
             // handle the text input
             if(handleKeydown(
                 event,
-                appContext->inputText,
-                appContext->inputContext
+                appContext,
+                renderer
             )!= 0){
                 return -1;
             }

@@ -78,6 +78,14 @@ int createTexturePicker(
     {
         return -1;
     }
+    if(initTextInputBox(
+        mainWindow->renderer,
+        appContext
+     ) != 0)
+    {
+        return -1;
+    }
+    
 
     return 0;
 }

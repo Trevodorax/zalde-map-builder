@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
         printMap(appContext.map);
         while(SDL_PollEvent(&event))
         {
-            switch(handleEvent(event, clickListeners, &appContext))
+            switch(handleEvent(event, clickListeners, &appContext, mainWindow.renderer))
             {
                 // there was an error during the event handling
                 case -1:
