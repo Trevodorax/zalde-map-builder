@@ -43,11 +43,12 @@
 #define SAVE_BUTTON_SIZE 50
 
 // text size
-#define LETTER_SIZE 20
+#define LETTER_SIZE 14
 
 // constants for input box position and size
 #define INPUT_BOX_POS_X 100
 #define INPUT_BOX_POS_Y 860
+#define INPUT_BOX_HEIGHT 20
 #define INPUT_BOX_MAX_WIDTH 1300
 
 #endif

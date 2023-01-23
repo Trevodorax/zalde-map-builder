@@ -12,7 +12,7 @@ int initTextInputBox(
         .x = INPUT_BOX_POS_X,
         .y = INPUT_BOX_POS_Y,
         .w = INPUT_BOX_MAX_WIDTH,
-        .h = LETTER_SIZE
+        .h = INPUT_BOX_HEIGHT
     };
     SDL_Color inputBoxColor = {0, 0, 0, 255};
 
@@ -54,10 +54,10 @@ int displayTextInputBoxValue(
 ){
 
     SDL_Rect message_rect = {
-        .x = INPUT_BOX_POS_X,
-        .y = INPUT_BOX_POS_Y,
+        .x = INPUT_BOX_POS_X+2,
+        .y = INPUT_BOX_POS_Y+2,
         .w = LETTER_SIZE * appContext->inputText->size,
-        .h = LETTER_SIZE
+        .h = LETTER_SIZE+2
     };
 
     if(renderInputBox(
