@@ -6,7 +6,8 @@ int initTextInputBox(
     SDL_Renderer * renderer, 
     appContext_t * appContext
 
-){
+)
+{
     // init rect input box
     SDL_Rect inputBoxRect = {
         .x = INPUT_BOX_POS_X,
@@ -24,7 +25,7 @@ int initTextInputBox(
         renderer
     )!= 0)
     {
-        fprintf(stderr, "drawThickRect error : %s", SDL_GetError());
+        fprintf(stderr, "\ndrawThickRect error");
         return -1;
     }
 
@@ -32,18 +33,17 @@ int initTextInputBox(
     
     if(appContext->inputText->size > 1){
         
-        if( displayTextInputBoxValue(
+        if(displayTextInputBoxValue(
             renderer,
             appContext
         )!= 0)
         {
-            fprintf(stderr, "displayTextInputBoxValue error : %s", SDL_GetError());
+            fprintf(stderr, "\ndisplayTextInputBoxValue error");
             return -1;
         }
     }
 
     return 0;
-
 }
 
 // display value in text input box
@@ -51,22 +51,23 @@ int initTextInputBox(
 int displayTextInputBoxValue(
     SDL_Renderer * renderer,
     appContext_t * appContext
-){
+)
+{
 
-    SDL_Rect message_rect = {
-        .x = INPUT_BOX_POS_X+2,
-        .y = INPUT_BOX_POS_Y+2,
+    SDL_Rect messageRect = {
+        .x = INPUT_BOX_POS_X + 2,
+        .y = INPUT_BOX_POS_Y + 2,
         .w = LETTER_SIZE * appContext->inputText->size,
-        .h = LETTER_SIZE+2
+        .h = LETTER_SIZE + 2
     };
 
     if(renderInputBox(
         appContext,
         renderer,
-        &message_rect
-    )!= 0)
+        &messageRect
+    ) != 0)
     {
-        fprintf(stderr, "renderInputBox error");
+        fprintf(stderr, "\nrenderInputBox error");
         return -1;
     }
 
@@ -77,28 +78,32 @@ int renderInputBox(
     appContext_t * appContext,
     SDL_Renderer * renderer,
     SDL_Rect * rect
-){
-    SDL_Surface* surfaceTextInputValue = NULL;
+)
+{
+    SDL_Surface * surfaceTextInputValue = NULL;
     SDL_Color textColor = { 0, 0, 0, 255 };
-    SDL_Texture* textInputValue = NULL;
-    TTF_Font * font = TTF_OpenFont( "assets/fonts/font1.ttf", 28 );
-    if(font == NULL ){
-        fprintf(stderr, "TTF_OpenFont error : %s", TTF_GetError());
+    SDL_Texture * textInputValue = NULL;
+    TTF_Font * font = TTF_OpenFont("assets/fonts/font1.ttf", 28);
+
+    if(font == NULL){
+        fprintf(stderr, "\nTTF_OpenFont error : %s", TTF_GetError());
         return -1;
     }
 
-    surfaceTextInputValue = TTF_RenderText_Solid( font, appContext->inputText->string, textColor ); 
-    if(surfaceTextInputValue == NULL ){
-        fprintf(stderr, "TTF_RenderText_Solid error : %s \n", TTF_GetError());
+    surfaceTextInputValue = TTF_RenderText_Solid(font, appContext->inputText->string, textColor); 
+    if(surfaceTextInputValue == NULL){
+        fprintf(stderr, "\nTTF_RenderText_Solid error : %s", TTF_GetError());
         return -1;
     }
     
     textInputValue = SDL_CreateTextureFromSurface( renderer, surfaceTextInputValue );
-    if(textInputValue == NULL ){
-        fprintf(stderr, "SDL_CreateTextureFromSurface error : %s \n", SDL_GetError());
+    if(textInputValue == NULL){
+        fprintf(stderr, "\nSDL_CreateTextureFromSurface error : %s", SDL_GetError());
         return -1;
     }
-    if(eraseInputBox(renderer)){
+
+    if(eraseInputBox(renderer) != 0) {
+        fprintf(stderr, "\neraseInputBox error");
         return -1;
     }
 
@@ -106,18 +111,20 @@ int renderInputBox(
     SDL_FreeSurface(surfaceTextInputValue);
     SDL_DestroyTexture(textInputValue);
     TTF_CloseFont(font);
+
     return 0;
 }
 
 
 int eraseInputBox(
     SDL_Renderer * renderer
-){
+)
+{
     SDL_Rect inputBoxRect = {
         .x = INPUT_BOX_POS_X,
         .y = INPUT_BOX_POS_Y,
         .w = INPUT_BOX_MAX_WIDTH,
-        .h = LETTER_SIZE
+        .h = INPUT_BOX_HEIGHT
     };
     SDL_Color inputBoxColor = {255, 255, 255, 255};
     // erase last text
@@ -125,7 +132,7 @@ int eraseInputBox(
     
     if(SDL_RenderFillRect(renderer, &inputBoxRect) != 0)
     {
-        fprintf(stderr, "SDL_RenderFillRect error : %s", SDL_GetError());
+        fprintf(stderr, "\nSDL_RenderFillRect error : %s", SDL_GetError());
         return -1;
     }
 

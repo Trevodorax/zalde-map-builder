@@ -34,16 +34,20 @@ int createTexturePicker(
         TEXTURE_PICKER_SIZE,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + NAVIGATION_BUTTON_SIZE + 10}
     ) != 0) {
+        fprintf(stderr, "createTexturePickerCategory error");
         return -1;
     }
 
     // create the navigation buttons
-    createNavigation(
+    if(createNavigation(
         mainWindow->renderer,
         clickListeners,
         appContext,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y}
-    );
+    ) != 0) {
+        fprintf(stderr, "createNavigation error");
+        return -1;
+    }
 
     // create the map
     if(createMap(
@@ -51,6 +55,7 @@ int createTexturePicker(
         mainWindow->renderer,
         appContext
     ) != 0) {
+        fprintf(stderr, "createMap error");
         return -1;
     }
 
@@ -61,7 +66,9 @@ int createTexturePicker(
     ) != 0)
     {
         fprintf(stderr, "createEraserButton error");
+        return -1;
     }
+
     if(createCurrentTextureInfo(
         mainWindow->renderer
     ) != 0)
@@ -76,13 +83,16 @@ int createTexturePicker(
         appContext
     ) != 0)
     {
+        fprintf(stderr, "createMapSaver error");
         return -1;
     }
+
     if(initTextInputBox(
         mainWindow->renderer,
         appContext
      ) != 0)
     {
+        fprintf(stderr, "initTextInputBox error");
         return -1;
     }
     

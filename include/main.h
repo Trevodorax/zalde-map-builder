@@ -11,4 +11,4 @@
 #include "map.h"
 
 
-#define LOOP_DELAY_MS 1000
+#define LOOP_DELAY_MS 200

@@ -12,20 +12,32 @@ int handleKeydown(
     {
         // press enter to save the text input
         case SDLK_RETURN:
-            enterValue(appContext, renderer);
+            if(enterValue(appContext, renderer) != 0)
+            {
+                fprintf(stderr, "\nenterValue error");
+                return -1;
+            }
             break;
         // press backspace to delete the last character
         case SDLK_BACKSPACE:
-            deleteLetter(appContext, renderer);
+            if(deleteLetter(appContext, renderer) != 0)
+            {
+                fprintf(stderr, "\ndeleteLetter error");
+                return -1;
+            }
             break;
         default:
             if(isLetter(event.key.keysym.sym))
             {
-                writeLetter(event.key.keysym.sym, appContext, renderer);
+                if(writeLetter(event.key.keysym.sym, appContext, renderer) != 0)
+                {
+                    fprintf(stderr, "\nwriteLetter error");
+                    return -1;
+                }
             }
             break;
     }
-    
+
     return 0;
 }
 
@@ -38,18 +50,24 @@ int writeLetter(
     appContext->inputText->string = realloc(appContext->inputText->string, appContext->inputText->size + 1);
     if(appContext->inputText->string == NULL)
     {
-        fprintf(stderr, "realloc error : %s", SDL_GetError());
+        fprintf(stderr, "\nrealloc error");
         return -1;
     }
+
     appContext->inputText->string[appContext->inputText->size - 1] = letter;
     appContext->inputText->string[appContext->inputText->size] = '\0';
     appContext->inputText->size++;
-    displayTextInputBoxValue(
+    
+    if(displayTextInputBoxValue(
         renderer,
         appContext
-    );
-    return 0;
+    ) != 0)
+    {
+        fprintf(stderr, "\ndisplayTextInputBoxValue error");
+        return -1;
+    }
 
+    return 0;
 }
 
 int deleteLetter(
@@ -65,15 +83,20 @@ int deleteLetter(
     appContext->inputText->string = realloc(appContext->inputText->string, appContext->inputText->size - 1);
     if(appContext->inputText->string == NULL)
     {
-        fprintf(stderr, "realloc error : %s", SDL_GetError());
+        fprintf(stderr, "\nrealloc error");
         return -1;
     }
     appContext->inputText->string[appContext->inputText->size - 2] = '\0';
     appContext->inputText->size--;
-    displayTextInputBoxValue(
+
+    if(displayTextInputBoxValue(
         renderer,
         appContext
-    );
+    ) != 0)
+    {
+        fprintf(stderr, "\ndisplayTextInputBoxValue error");
+        return -1;
+    }
 
     return 0;
 }
@@ -88,6 +111,6 @@ int enterValue(
             printf("\ntext : %s", appContext->inputText->string);
             return 0;
     }
-    
+
     return 0;
 }
