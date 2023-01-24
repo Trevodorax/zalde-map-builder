@@ -45,8 +45,13 @@ int writeLetter(
     char letter,
     appContext_t * appContext,
     SDL_Renderer * renderer
-) 
+)
 {
+    if(appContext->inputText->size >= INPUT_BOX_MAX_CHARS)
+    {
+        return 0;
+    }
+    
     appContext->inputText->string = realloc(appContext->inputText->string, appContext->inputText->size + 1);
     if(appContext->inputText->string == NULL)
     {
@@ -106,7 +111,8 @@ int enterValue(
     SDL_Renderer * renderer
 )
 {
-    switch(appContext->inputContext){
+    switch(appContext->inputContext)
+    {
         case '0':
             printf("\ntext : %s", appContext->inputText->string);
             return 0;
