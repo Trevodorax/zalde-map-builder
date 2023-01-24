@@ -53,7 +53,6 @@ int displayTextInputBoxValue(
     appContext_t * appContext
 )
 {
-
     SDL_Rect messageRect = {
         .x = INPUT_BOX_POS_X + 2,
         .y = INPUT_BOX_POS_Y + 2,
@@ -85,9 +84,19 @@ int renderInputBox(
     SDL_Texture * textInputValue = NULL;
     TTF_Font * font = TTF_OpenFont("assets/fonts/font1.ttf", 28);
 
+    if(eraseInputBox(renderer) != 0) {
+        fprintf(stderr, "\neraseInputBox error");
+        return -1;
+    }
+
     if(font == NULL){
         fprintf(stderr, "\nTTF_OpenFont error : %s", TTF_GetError());
         return -1;
+    }
+
+    if(appContext->inputText->size == 1)
+    {
+        return 0;
     }
 
     surfaceTextInputValue = TTF_RenderText_Solid(font, appContext->inputText->string, textColor); 
@@ -99,11 +108,6 @@ int renderInputBox(
     textInputValue = SDL_CreateTextureFromSurface( renderer, surfaceTextInputValue );
     if(textInputValue == NULL){
         fprintf(stderr, "\nSDL_CreateTextureFromSurface error : %s", SDL_GetError());
-        return -1;
-    }
-
-    if(eraseInputBox(renderer) != 0) {
-        fprintf(stderr, "\neraseInputBox error");
         return -1;
     }
 

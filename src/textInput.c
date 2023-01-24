@@ -75,7 +75,7 @@ int deleteLetter(
     SDL_Renderer * renderer
 ) 
 {
-    if(appContext->inputText->size <= 1)
+    if(appContext->inputText->size == 1) // 1 because of the '\0' character
     {
         return 0;
     }
