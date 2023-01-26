@@ -8,6 +8,10 @@
 #include "typedefs.h"
 #include "textInputBox.h"
 
+void initTextInput(
+    appContext_t * appContext
+);
+
 int handleKeydown(
     SDL_Event event,
     appContext_t * appContext,

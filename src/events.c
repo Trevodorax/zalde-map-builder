@@ -19,7 +19,8 @@ int handleEvent(
             return 0;
         // handle keyboard events
         case SDL_KEYDOWN:
-            if(event.key.keysym.sym == SDLK_ESCAPE) {
+            if(event.key.keysym.sym == SDLK_ESCAPE)
+            {
                 return 0;
             }
 
@@ -28,7 +29,8 @@ int handleEvent(
                 event,
                 appContext,
                 renderer
-            )!= 0){
+            )!= 0)
+            {
                 return -1;
             }
             break;

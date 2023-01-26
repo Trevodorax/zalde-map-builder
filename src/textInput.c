@@ -1,6 +1,15 @@
 #include "textInput.h"
 
-
+void initTextInput(
+    appContext_t * appContext
+)
+{
+    appContext->inputContext = '0';
+    appContext->inputText = malloc(sizeof(sizedString_t));
+    appContext->inputText->string = malloc(sizeof(char) * 1);
+    appContext->inputText->string[0] = '\0';
+    appContext->inputText->size = 1;
+}
 
 int handleKeydown(
     SDL_Event event,

@@ -12,21 +12,17 @@ int main(int argc, char *argv[])
     appContext.texturePickerLetter = EMPTY_TEXTURE_CHAR;
     appContext.currentTileNumber = EMPTY_TEXTURE_NUMBER;
     appContext.isErasing = 0;
-    appContext.inputContext = '0';
-    appContext.inputText = malloc(sizeof(sizedString_t));
-    appContext.inputText->string = malloc(sizeof(char) * 1);
-    appContext.inputText->string[0] = '\0';
-    appContext.inputText->size = 1;
 
+    initTextInput(&appContext);
     initMap(appContext.map);
 
     if(clickListeners == NULL)
     {
-        fprintf(stderr, "malloc error : %s", SDL_GetError());
         return EXIT_FAILURE;
     }
     
-    if(TTF_Init() == -1) {
+    if(TTF_Init() == -1)
+    {
         printf( "SDL_ttf could not initialize! SDL_ttf Error: %s", TTF_GetError() );
         return EXIT_FAILURE;
 	} 

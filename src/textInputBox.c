@@ -31,7 +31,8 @@ int initTextInputBox(
 
     // display text input box
     
-    if(appContext->inputText->size > 1){
+    if(appContext->inputText->size > 1)
+    {
         
         if(displayTextInputBoxValue(
             renderer,
@@ -84,12 +85,14 @@ int renderInputBox(
     SDL_Texture * textInputValue = NULL;
     TTF_Font * font = TTF_OpenFont("assets/fonts/font1.ttf", 28);
 
-    if(eraseInputBox(renderer) != 0) {
+    if(eraseInputBox(renderer) != 0)
+    {
         fprintf(stderr, "\neraseInputBox error");
         return -1;
     }
 
-    if(font == NULL){
+    if(font == NULL)
+    {
         fprintf(stderr, "\nTTF_OpenFont error : %s", TTF_GetError());
         return -1;
     }
@@ -106,8 +109,13 @@ int renderInputBox(
     }
     
     textInputValue = SDL_CreateTextureFromSurface( renderer, surfaceTextInputValue );
-    if(textInputValue == NULL){
-        fprintf(stderr, "\nSDL_CreateTextureFromSurface error : %s", SDL_GetError());
+    if(textInputValue == NULL )
+    {
+        fprintf(stderr, "SDL_CreateTextureFromSurface error : %s \n", SDL_GetError());
+        return -1;
+    }
+    if(eraseInputBox(renderer))
+    {
         return -1;
     }
 
@@ -132,7 +140,11 @@ int eraseInputBox(
     };
     SDL_Color inputBoxColor = {255, 255, 255, 255};
     // erase last text
-    SDL_SetRenderDrawColor(renderer, inputBoxColor.r, inputBoxColor.g, inputBoxColor.b, inputBoxColor.a);
+    if(SDL_SetRenderDrawColor(renderer, inputBoxColor.r, inputBoxColor.g, inputBoxColor.b, inputBoxColor.a))
+    {
+        fprintf(stderr, "SDL_SetRenderDrawColor error : %s", SDL_GetError());
+        return -1;
+    }
     
     if(SDL_RenderFillRect(renderer, &inputBoxRect) != 0)
     {
