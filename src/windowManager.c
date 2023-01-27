@@ -33,7 +33,8 @@ int createTexturePicker(
         clickListeners, 
         TEXTURE_PICKER_SIZE,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + NAVIGATION_BUTTON_SIZE + 10}
-    ) != 0) {
+    ) != 0) 
+    {
         fprintf(stderr, "createTexturePickerCategory error");
         return -1;
     }
@@ -44,7 +45,8 @@ int createTexturePicker(
         clickListeners,
         appContext,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y}
-    ) != 0) {
+    ) != 0) 
+    {
         fprintf(stderr, "createNavigation error");
         return -1;
     }
@@ -54,7 +56,8 @@ int createTexturePicker(
         clickListeners,
         mainWindow->renderer,
         appContext
-    ) != 0) {
+    ) != 0) 
+    {
         fprintf(stderr, "createMap error");
         return -1;
     }
@@ -90,7 +93,7 @@ int createTexturePicker(
     if(initTextInputBox(
         mainWindow->renderer,
         appContext
-     ) != 0)
+    ) != 0)
     {
         fprintf(stderr, "initTextInputBox error");
         return -1;

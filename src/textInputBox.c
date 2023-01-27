@@ -23,7 +23,7 @@ int initTextInputBox(
         2,
         inputBoxColor,
         renderer
-    )!= 0)
+    ) != 0)
     {
         fprintf(stderr, "\ndrawThickRect error");
         return -1;
@@ -37,7 +37,7 @@ int initTextInputBox(
         if(displayTextInputBoxValue(
             renderer,
             appContext
-        )!= 0)
+        ) != 0)
         {
             fprintf(stderr, "\ndisplayTextInputBoxValue error");
             return -1;
@@ -103,17 +103,19 @@ int renderInputBox(
     }
 
     surfaceTextInputValue = TTF_RenderText_Solid(font, appContext->inputText->string, textColor); 
-    if(surfaceTextInputValue == NULL){
+    if(surfaceTextInputValue == NULL)
+    {
         fprintf(stderr, "\nTTF_RenderText_Solid error : %s", TTF_GetError());
         return -1;
     }
     
-    textInputValue = SDL_CreateTextureFromSurface( renderer, surfaceTextInputValue );
+    textInputValue = SDL_CreateTextureFromSurface(renderer, surfaceTextInputValue);
     if(textInputValue == NULL )
     {
         fprintf(stderr, "SDL_CreateTextureFromSurface error : %s \n", SDL_GetError());
         return -1;
     }
+
     if(eraseInputBox(renderer))
     {
         return -1;

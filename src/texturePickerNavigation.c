@@ -97,7 +97,8 @@ void setTexturePickerCategory(
         BUTTON_TYPE_TEXTURE_PICKER,
         renderer,
         clickListeners
-    ) != 0) {
+    ) != 0) 
+    {
         fprintf(stderr, "error deleting tile picker");
         return;
     };
@@ -117,7 +118,8 @@ void setTexturePickerCategory(
             TEXTURE_PICKER_SIZE,
             (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + 60}
         ) != 0
-    ) {
+    ) 
+    {
         fprintf(stderr, "error creating tile picker");
         return;
     }

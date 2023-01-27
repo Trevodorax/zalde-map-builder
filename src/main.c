@@ -6,6 +6,11 @@ int main(int argc, char *argv[])
     
     SDL_Event event;
     clickListener_t * clickListeners = initClickListeners();
+    if(clickListeners == NULL)
+    {
+        fprintf(stderr, "malloc error");
+        return EXIT_FAILURE;
+    }
 
     appContext_t appContext;
     appContext.currentTileLetter = '0';
@@ -16,20 +21,16 @@ int main(int argc, char *argv[])
     initTextInput(&appContext);
     initMap(appContext.map);
 
-    if(clickListeners == NULL)
-    {
-        return EXIT_FAILURE;
-    }
     
     if(TTF_Init() == -1)
     {
-        printf( "SDL_ttf could not initialize! SDL_ttf Error: %s", TTF_GetError() );
+        printf("SDL_ttf error: %s", TTF_GetError());
         return EXIT_FAILURE;
 	} 
 
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
-        fprintf(stderr, "Error SDL_Init : %s", SDL_GetError());
+        fprintf(stderr, "SDL_Init error : %s", SDL_GetError());
         freeClickListeners(clickListeners);
         return EXIT_FAILURE;
     }
