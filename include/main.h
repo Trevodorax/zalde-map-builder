@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "utils.h"
 #include "windowManager.h"
@@ -10,4 +11,4 @@
 #include "map.h"
 
 
-#define LOOP_DELAY_MS 1000
+#define LOOP_DELAY_MS 200

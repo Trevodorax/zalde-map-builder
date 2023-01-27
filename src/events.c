@@ -7,21 +7,31 @@
 */
 int handleEvent(
     SDL_Event event, 
-    clickListener_t * clickListeners
-) 
+    clickListener_t * clickListeners,
+    appContext_t * appContext,
+    SDL_Renderer * renderer
+)
 {
-    switch(event.type) 
+    switch(event.type)
     {
         // handle window exit icon
         case SDL_QUIT:
             return 0;
         // handle keyboard events
         case SDL_KEYDOWN:
-            switch(event.key.keysym.sym) 
+            if(event.key.keysym.sym == SDLK_ESCAPE)
             {
-                // press escape to leave the program
-                case SDLK_ESCAPE:
-                    return 0;
+                return 0;
+            }
+
+            // handle the text input
+            if(handleKeydown(
+                event,
+                appContext,
+                renderer
+            )!= 0)
+            {
+                return -1;
             }
             break;
         // handle mouse events

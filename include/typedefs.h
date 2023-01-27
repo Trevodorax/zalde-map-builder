@@ -26,11 +26,18 @@ typedef struct {
 } mapTile_t;
 
 typedef struct {
+    char * string;
+    size_t size;
+} sizedString_t;
+
+typedef struct {
     char currentTileLetter;
     unsigned short currentTileNumber;
     char texturePickerLetter;
     mapTile_t map[MAP_SIZE][MAP_SIZE];
     int isErasing;
+    sizedString_t * inputText;
+    char inputContext;
 } appContext_t;
 
 typedef struct {
@@ -66,5 +73,6 @@ typedef struct {
     SDL_Window * window;
     SDL_Renderer * renderer;
 } windowAndRenderer_t;
+
 
 #endif

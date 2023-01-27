@@ -13,13 +13,19 @@ int main(int argc, char *argv[])
     appContext.currentTileNumber = EMPTY_TEXTURE_NUMBER;
     appContext.isErasing = 0;
 
+    initTextInput(&appContext);
     initMap(appContext.map);
 
     if(clickListeners == NULL)
     {
-        fprintf(stderr, "malloc error : %s", SDL_GetError());
         return EXIT_FAILURE;
     }
+    
+    if(TTF_Init() == -1)
+    {
+        printf( "SDL_ttf could not initialize! SDL_ttf Error: %s", TTF_GetError() );
+        return EXIT_FAILURE;
+	} 
 
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
@@ -53,7 +59,7 @@ int main(int argc, char *argv[])
         printMap(appContext.map);
         while(SDL_PollEvent(&event))
         {
-            switch(handleEvent(event, clickListeners))
+            switch(handleEvent(event, clickListeners, &appContext, mainWindow.renderer))
             {
                 // there was an error during the event handling
                 case -1:
