@@ -19,7 +19,7 @@ int initWindowAndRenderer(
     );
     if(!createdWindow->window)
     {
-        fprintf(stderr, "SDL_CreateWindow error : %s", SDL_GetError());
+        fprintf(stderr, "\nSDL_CreateWindow error : %s", SDL_GetError());
         return -1;
     }
 
@@ -30,7 +30,7 @@ int initWindowAndRenderer(
     );
     if(!createdWindow->renderer)
     {
-        fprintf(stderr, "SDL_CreateRenderer error : %s", SDL_GetError());
+        fprintf(stderr, "\nSDL_CreateRenderer error : %s", SDL_GetError());
         return -1;
     }
 
@@ -64,7 +64,7 @@ int setDrawColor(
         color.a
     ) != 0)
     {
-        fprintf(stderr, "SDL_SetRenderDrawColor error : %s", SDL_GetError());
+        fprintf(stderr, "\nSDL_SetRenderDrawColor error : %s", SDL_GetError());
         return -1;
     }
 
@@ -85,7 +85,7 @@ int setBackgroundColor(
     
     if(SDL_RenderClear(renderer) != 0)
     {
-        fprintf(stderr, "SDL_RenderClear error : %s", SDL_GetError());
+        fprintf(stderr, "\nSDL_RenderClear error : %s", SDL_GetError());
         return -1;
     }
 
@@ -102,6 +102,11 @@ SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileNam
     // final returned texture
     SDL_Texture * imgTexture = NULL;
 
+    if(imageFileName == NULL)
+    {
+        return NULL;
+    }
+
     // get the image surface
     imgSurface = SDL_LoadBMP(imageFileName);
     if(NULL == imgSurface)
@@ -113,7 +118,7 @@ SDL_Texture * getImageTexture(SDL_Renderer * renderer, const char * imageFileNam
     imgTexture = SDL_CreateTextureFromSurface(renderer, imgSurface);
     if(imgTexture == NULL)
     {
-        fprintf(stderr, "Error SDL_CreateTextureFromSurface : %s", SDL_GetError());
+        fprintf(stderr, "\nError SDL_CreateTextureFromSurface : %s", SDL_GetError());
         return NULL;
     }
 
@@ -137,7 +142,7 @@ int drawFillRect(
 
     if(SDL_RenderFillRect(renderer, &rect) != 0)
     {
-        fprintf(stderr, "SDL_RenderFillRect error : %s", SDL_GetError());
+        fprintf(stderr, "\nSDL_RenderFillRect error : %s", SDL_GetError());
         return -1;
     }
 
@@ -159,7 +164,7 @@ int drawThickRect(
         color.a
     ) != 0)
     {
-        fprintf(stderr, "SDL_SetRenderDrawColor error : %s", SDL_GetError());
+        fprintf(stderr, "\nSDL_SetRenderDrawColor error : %s", SDL_GetError());
         return -1;
     }
 
@@ -177,7 +182,7 @@ int drawThickRect(
             &currentContainerRect
         ) != 0)
         {
-            fprintf(stderr, "SDL_RenderDrawRect error : %s", SDL_GetError());
+            fprintf(stderr, "\nSDL_RenderDrawRect error : %s", SDL_GetError());
             return -1;
         }
     }
