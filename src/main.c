@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
     clickListener_t * clickListeners = initClickListeners();
     if(clickListeners == NULL)
     {
-        fprintf(stderr, "malloc error");
+        fprintf(stderr, "\nmalloc error");
         return EXIT_FAILURE;
     }
 
@@ -19,18 +19,18 @@ int main(int argc, char *argv[])
     appContext.isErasing = 0;
 
     initTextInput(&appContext);
+
     initMap(appContext.map);
 
-    
     if(TTF_Init() == -1)
     {
-        printf("SDL_ttf error: %s", TTF_GetError());
+        printf("\nSDL_ttf error: %s", TTF_GetError());
         return EXIT_FAILURE;
 	} 
 
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
     {
-        fprintf(stderr, "SDL_Init error : %s", SDL_GetError());
+        fprintf(stderr, "\nSDL_Init error : %s", SDL_GetError());
         freeClickListeners(clickListeners);
         return EXIT_FAILURE;
     }
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
-    if(createTexturePicker(
+    if(createModules(
         &mainWindow,
         clickListeners,
         &appContext
@@ -54,10 +54,18 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    if(argv[1] != NULL)
+    {
+        if(loadMap(appContext.map, argv[1]) != 0)
+        {
+            fprintf(stderr, "\nloadMap error");
+            freeClickListeners(clickListeners);
+            return EXIT_FAILURE;
+        }
+    }
 
     while(1) 
     {
-        printMap(appContext.map);
         while(SDL_PollEvent(&event))
         {
             switch(handleEvent(event, clickListeners, &appContext, mainWindow.renderer))

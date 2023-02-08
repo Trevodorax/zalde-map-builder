@@ -13,7 +13,7 @@
 
 int initMainWindow(windowAndRenderer_t * mainWindow);
 
-int createTexturePicker(
+int createModules(
     windowAndRenderer_t * mainWindow,
     clickListener_t * clickListeners,
     appContext_t * appContext

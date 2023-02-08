@@ -50,7 +50,7 @@ int createMap(
                 appContext
             ) != 0)
             {
-                fprintf(stderr, "createMapTile error");
+                fprintf(stderr, "\ncreateMapTile error");
                 return -1;
             }
         }
@@ -70,7 +70,7 @@ int createMapTile(
     setMapTileArgs_t * setCurrentTileArgs = malloc(sizeof(setMapTileArgs_t));
     if(setCurrentTileArgs == NULL)
     {
-        fprintf(stderr, "malloc error");
+        fprintf(stderr, "\nmalloc error");
         return -1;
     }
 
@@ -91,7 +91,7 @@ int createMapTile(
         renderer
     ) != 0)
     {
-        fprintf(stderr, "createButton error");
+        fprintf(stderr, "\ncreateButton error");
         return -1;
     }
 
@@ -151,7 +151,7 @@ void setMapTile(void * callbackArgs)
         args->renderer
     ) != 0)
     {
-        fprintf(stderr, "updateMapTileTexture error");
+        fprintf(stderr, "\nupdateMapTileTexture error");
         return;
     }
 }
@@ -204,13 +204,13 @@ int updateMapTileTexture(
     {
         if(SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255) != 0)
         {
-            fprintf(stderr, "SDL_SetRenderDrawColor error: %s", SDL_GetError());
+            fprintf(stderr, "\nSDL_SetRenderDrawColor error: %s", SDL_GetError());
             return -1;
         }
 
         if(SDL_RenderFillRect(renderer, &tileRect) != 0)
         {
-            fprintf(stderr, "SDL_RenderFillRect error: %s", SDL_GetError());
+            fprintf(stderr, "\nSDL_RenderFillRect error: %s", SDL_GetError());
             return -1;
         }
 
@@ -231,7 +231,7 @@ int updateMapTileTexture(
 
     if(SDL_RenderCopy(renderer, tileTexture, NULL, &tileRect) != 0)
     {
-        fprintf(stderr, "SDL_RenderCopy error: %s", SDL_GetError());
+        fprintf(stderr, "\nSDL_RenderCopy error: %s", SDL_GetError());
         return -1;
     }
 

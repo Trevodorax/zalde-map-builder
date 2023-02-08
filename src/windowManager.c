@@ -19,13 +19,12 @@ int initMainWindow(windowAndRenderer_t * mainWindow)
 
 
 // create the texture picker and navigation buttons
-int createTexturePicker(
+int createModules(
     windowAndRenderer_t * mainWindow,
     clickListener_t * clickListeners,
     appContext_t * appContext
 )
 {
-
     // create the category
     if(createTexturePickerCategory(
         mainWindow->renderer, 
@@ -33,9 +32,9 @@ int createTexturePicker(
         clickListeners, 
         TEXTURE_PICKER_SIZE,
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y + NAVIGATION_BUTTON_SIZE + 10}
-    ) != 0) 
+    ) != 0)
     {
-        fprintf(stderr, "createTexturePickerCategory error");
+        fprintf(stderr, "\ncreateTexturePickerCategory error");
         return -1;
     }
 
@@ -47,7 +46,7 @@ int createTexturePicker(
         (SDL_Point) {TILE_SECTION_POS_X, TILE_SECTION_POS_Y}
     ) != 0) 
     {
-        fprintf(stderr, "createNavigation error");
+        fprintf(stderr, "\ncreateNavigation error");
         return -1;
     }
 
@@ -58,7 +57,7 @@ int createTexturePicker(
         appContext
     ) != 0) 
     {
-        fprintf(stderr, "createMap error");
+        fprintf(stderr, "\ncreateMap error");
         return -1;
     }
 
@@ -68,7 +67,7 @@ int createTexturePicker(
         clickListeners
     ) != 0)
     {
-        fprintf(stderr, "createEraserButton error");
+        fprintf(stderr, "\ncreateEraserButton error");
         return -1;
     }
 
@@ -76,7 +75,7 @@ int createTexturePicker(
         mainWindow->renderer
     ) != 0)
     {
-        fprintf(stderr, "createCurrentTextureInfo error");
+        fprintf(stderr, "\ncreateCurrentTextureInfo error");
         return -1;
     }
 
@@ -86,7 +85,7 @@ int createTexturePicker(
         appContext
     ) != 0)
     {
-        fprintf(stderr, "createMapSaver error");
+        fprintf(stderr, "\ncreateMapSaver error");
         return -1;
     }
 
@@ -95,7 +94,7 @@ int createTexturePicker(
         appContext
     ) != 0)
     {
-        fprintf(stderr, "initTextInputBox error");
+        fprintf(stderr, "\ninitTextInputBox error");
         return -1;
     }
     

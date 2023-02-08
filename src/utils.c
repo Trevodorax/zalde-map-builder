@@ -7,6 +7,11 @@ char * getTileFileName(
     const unsigned short number
 ) 
 {
+    if(letter == EMPTY_TEXTURE_CHAR && number == EMPTY_TEXTURE_NUMBER)
+    {
+        return NULL;
+    }
+    
     // variables that compose the texture file name
     char textureFileLetter[2] = "?\0";
     char textureFileNumberString[3];

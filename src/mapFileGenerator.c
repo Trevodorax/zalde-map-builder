@@ -11,7 +11,7 @@ int createMapSaver(
     saveMapArgs_t * saveMapArgs = malloc(sizeof(saveMapArgs_t));
     if(saveMapArgs == NULL)
     {
-        fprintf(stderr, "malloc error");
+        fprintf(stderr, "\nmalloc error");
         return -1;
     }
 
@@ -29,7 +29,7 @@ int createMapSaver(
         renderer
     ) != 0)
     {
-        fprintf(stderr, "createButton error");
+        fprintf(stderr, "\ncreateButton error");
         return -1;
     }
 
@@ -42,7 +42,7 @@ void saveMap(void * voidArgs)
 
     if(generateMapFile(args->appContext->map) != 0)
     {
-        fprintf(stderr, "generateMapFile error");
+        fprintf(stderr, "\ngenerateMapFile error");
     }
 
     return;
@@ -55,7 +55,7 @@ int generateMapFile(
     FILE * mapFile = fopen("maps/map.zalde", "w");
     if(mapFile == NULL)
     {
-        fprintf(stderr, "fopen error");
+        fprintf(stderr, "\nfopen error");
         return -1;
     }
 
