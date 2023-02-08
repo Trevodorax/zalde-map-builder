@@ -7,20 +7,19 @@ It also lets you modify existing map files.
 ## Using the app
 ### Get the project and dependencies
 #### Ubuntu / Debian
-`sudo apt-get install gcc git make libsdl2-dev`
-#### Windows
-https://sourceforge.net/projects/mingw-w64/
+`sudo apt-get install gcc git make libsdl2-dev libsdl2-ttf-dev`
+#### Windows and Mac
+![Good luck](https://media.giphy.com/media/pDgHg2Lcju3Ty/giphy.gif)
 
-Run the downloaded executable
-
-
-#### Clone the project
+### Clone the project
 `git clone https://github.com/Trevodorax/zalde-map-builder.git`
 
 ### Compile the project
 #### Go in the project
 `cd zalde-map-builder`
 #### Compile using make
+If on Window or Mac, update the Makefile (the part where we use sdl and sdl-ttf) to make sdl work
+
 `make`
 
 #### Run the executable
