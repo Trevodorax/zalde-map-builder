@@ -56,7 +56,11 @@ int main(int argc, char *argv[])
 
     if(argv[1] != NULL)
     {
-        if(loadMap(appContext.map, argv[1]) != 0)
+        if(loadMap(
+            appContext.map, 
+            argv[1],
+            mainWindow.renderer
+        ) != 0)
         {
             fprintf(stderr, "\nloadMap error");
             freeClickListeners(clickListeners);
@@ -93,6 +97,8 @@ int main(int argc, char *argv[])
         SDL_RenderPresent(mainWindow.renderer);
         SDL_Delay(LOOP_DELAY_MS);
     }
+
+    
 
     return EXIT_SUCCESS;
 }

@@ -5,6 +5,24 @@ It features an interface to choose which tile to put in each place, and lets you
 It also lets you modify existing map files.
 
 ## Using the app
+### Creating maps
+When the app is open, you have multiple things :
+- On the left, a list of textures you can add to your map
+- On the right, the map itself (should be a grey rectangle at the beginning)
+- Additionnal widgets on the right of it (to delete, see your currently selected texure, and save your map)
+
+To create a map, just start adding textures to the map by clicking on a texture and clicking on a tile of the map.
+
+When you are done, don't forget to save it ;)
+
+### Updating existing maps
+If you have a map from someone else that you wish to modify, or you saved a map and want to edit it, you can simply open it in the app by giving the path to the map in parameter.
+
+The path must be given relatively to the root of the project.
+
+For example : `./bin/index maps/myMap.zalde`
+
+## launching the app
 ### Get the project and dependencies
 #### Ubuntu / Debian
 `sudo apt-get install gcc git make libsdl2-dev libsdl2-ttf-dev`

@@ -1,6 +1,11 @@
 #include "loadMap.h"
 
-int loadMap(mapTile_t map[MAP_SIZE][MAP_SIZE], char * mapName)
+// loads the given map into the map array and render it
+int loadMap(
+    mapTile_t map[MAP_SIZE][MAP_SIZE], 
+    char * mapName,
+    SDL_Renderer * renderer
+)
 {
     FILE * mapFile = fopen(mapName, "r");
     if(mapFile == NULL)
@@ -37,7 +42,8 @@ int loadMap(mapTile_t map[MAP_SIZE][MAP_SIZE], char * mapName)
                 map,
                 x,
                 y,
-                currentLoadedTile
+                currentLoadedTile,
+                renderer
             );
 
             fgetc(mapFile); // skip the semicolon
@@ -49,16 +55,18 @@ int loadMap(mapTile_t map[MAP_SIZE][MAP_SIZE], char * mapName)
     return 0;
 }
 
+// loads a tile, and updates the map array and the renderer
 int handleLoadedTile(
     mapTile_t map[MAP_SIZE][MAP_SIZE],
     size_t x,
     size_t y,
-    mapTile_t currentLoadedTile
+    mapTile_t currentLoadedTile,
+    SDL_Renderer * renderer
 )
 {
     if(currentLoadedTile.isLinkedMap)
     {
-        printf("\nmap[%zu][%zu] leads to a linked map.", x, y);
+        map[x][y].isLinkedMap = 1;
     }
 
     if(isEmptyTexture(currentLoadedTile.primaryTexture))
@@ -66,19 +74,43 @@ int handleLoadedTile(
         return 1;
     }
     
-    printf("\nReplace primary texture in map[%zu][%zu] with %c%hu", x, y, currentLoadedTile.primaryTexture.letter, currentLoadedTile.primaryTexture.number);
+    if(updateMapTileTexture(
+        x,
+        y,
+        currentLoadedTile.primaryTexture.letter, 
+        currentLoadedTile.primaryTexture.number,
+        renderer
+    ) != 0)
+    {
+        fprintf(stderr, "\nupdateMapTileTexture error");
+        return -1;
+    }
+
+    map[x][y].primaryTexture = currentLoadedTile.primaryTexture;
 
     if(isEmptyTexture(currentLoadedTile.secondaryTexture))
     {
         return 1;
     }
-    
-    printf("\nReplace secondary texture in map[%zu][%zu] with %c%hu", x, y, currentLoadedTile.secondaryTexture.letter, currentLoadedTile.secondaryTexture.number);
+
+    if(updateMapTileTexture(
+        x,
+        y,
+        currentLoadedTile.secondaryTexture.letter, 
+        currentLoadedTile.secondaryTexture.number,
+        renderer
+    ) != 0)
+    {
+        fprintf(stderr, "\nupdateMapTileTexture error");
+        return -1;
+    }
+
+    map[x][y].secondaryTexture = currentLoadedTile.secondaryTexture;
 
     return 1;
 }
 
-isEmptyTexture(texture_t texture)
+int isEmptyTexture(texture_t texture)
 {
     return texture.letter == EMPTY_TEXTURE_CHAR && texture.number == EMPTY_TEXTURE_NUMBER;
 }
