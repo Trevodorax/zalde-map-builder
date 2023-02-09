@@ -7,6 +7,9 @@
 #include "utils.h"
 #include "typedefs.h"
 #include "textInputBox.h"
+//to delete after       TEST
+#include "saveMap.h"
+
 
 void initTextInput(
     appContext_t * appContext

@@ -123,6 +123,7 @@ int enterValue(
     switch(appContext->inputContext)
     {
         case '0':
+            saveMapName(appContext->inputText);
             printf("\ntext : %s", appContext->inputText->string);
             return 0;
     }
