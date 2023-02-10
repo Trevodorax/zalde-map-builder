@@ -116,28 +116,28 @@ FILE * saveMapName(
     sizedString_t * mapName
 )
 {
-    char * mapNameWithExt = malloc(mapName->size + 11);
+    char * mapNameWithExtension = malloc(mapName->size + 11);
     char extention[7] = ".zalde";
 
-    if(mapNameWithExt == NULL)
+    if(mapNameWithExtension == NULL)
     {
         fprintf(stderr, "\nmalloc error");
         return NULL;
     }
-    mapNameWithExt[0] = '\0';
+    mapNameWithExtension[0] = '\0';
     
-    strcat(mapNameWithExt, "maps/");
-    strcat(mapNameWithExt, mapName->string);
-    strcat(mapNameWithExt, extention);
+    strcat(mapNameWithExtension, "maps/");
+    strcat(mapNameWithExtension, mapName->string);
+    strcat(mapNameWithExtension, extention);
 
-    FILE * mapNameFile = fopen(mapNameWithExt, "w");
+    FILE * mapNameFile = fopen(mapNameWithExtension, "w");
     if(mapNameFile == NULL)
     {
         fprintf(stderr, "\nError opening mapName.txt");
         return NULL;
     }
 
-    free(mapNameWithExt);
+    free(mapNameWithExtension);
 
     return mapNameFile;
 }
