@@ -64,10 +64,6 @@ ERASERC := src/eraser.c
 MAPFILEGENERATORO := build/mapFileGenerator.o
 MAPFILEGENERATORC := src/mapFileGenerator.c
 
-# map saver
-SAVEMAPO := build/saveMap.o
-SAVEMAPC := src/saveMap.c
-
 # handling events
 EVENTSO := build/events.o
 EVENTSC := src/events.c
@@ -81,7 +77,7 @@ BUTTONO := build/button.o
 BUTTONC := src/button.c
 
 # Objects string
-OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(TEXTINPUTO) $(TEXTINPUTBOXO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO) $(ERASERO) $(CURRENTTEXTUREINFOC) $(MAPFILEGENERATORO) $(SAVEMAPO) $(LOADMAPO)
+OBJS := $(MAINO) $(UTILSO) $(SDLUTILSO) $(WINDOWMANAGERO) $(TEXTINPUTO) $(TEXTINPUTBOXO) $(BUTTONO) $(EVENTSO) $(TEXTUREPICKERO) $(TEXTUREPICKERNAVIGATIONO) $(CLICKLISTENERSO) $(MAPO) $(ERASERO) $(CURRENTTEXTUREINFOC) $(MAPFILEGENERATORO) $(LOADMAPO)
 
 # Build executable
 $(EXE): $(OBJS)
@@ -151,11 +147,6 @@ $(ERASERO): $(ERASERC)
 $(MAPFILEGENERATORO): $(MAPFILEGENERATORC)
 	@mkdir -p build
 	$(CC) -c $(MAPFILEGENERATORC) $(CFLAGS) -o $@
-
-# Build map saver object
-$(SAVEMAPO): $(SAVEMAPC)
-	@mkdir -p build
-	$(CC) -c $(SAVEMAPC) $(CFLAGS) -o $@
 
 # Build events object
 $(EVENTSO): $(EVENTSC)

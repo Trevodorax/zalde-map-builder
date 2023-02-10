@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "button.h": "c",
+        "textinput.h": "c"
+    }
+}
