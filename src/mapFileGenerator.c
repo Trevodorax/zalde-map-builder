@@ -117,6 +117,8 @@ FILE * saveMapName(
 )
 {
     char * mapNameWithExtension = malloc(mapName->size + 11);
+    char path[6] = "maps/";
+    char extension[7] = ".zalde";
 
     if(mapNameWithExtension == NULL)
     {
@@ -125,9 +127,9 @@ FILE * saveMapName(
     }
     mapNameWithExtension[0] = '\0';
     
-    strcat(mapNameWithExtension, "maps/");
+    strcat(mapNameWithExtension, path);
     strcat(mapNameWithExtension, mapName->string);
-    strcat(mapNameWithExtension, ".zalde");
+    strcat(mapNameWithExtension, extension);
 
     FILE * mapNameFile = fopen(mapNameWithExtension, "w");
     if(mapNameFile == NULL)
