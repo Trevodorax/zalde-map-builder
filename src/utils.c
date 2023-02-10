@@ -18,6 +18,13 @@ char * getTileFileName(
 
     // concatenatiuon of all previous variables
     char * textureFileName = malloc(30 * sizeof(char));
+    if (textureFileName == NULL)
+    {
+        fprintf(stderr, "\nmalloc error");
+        return NULL;
+    }
+    
+
     textureFileName[0] = '\0';
 
     // use the values given in params

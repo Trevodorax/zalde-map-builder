@@ -39,8 +39,12 @@ int createMapSaver(
 void saveMap(void * voidArgs)
 {
     saveMapArgs_t * args = (saveMapArgs_t *) voidArgs;
-
-    if(generateMapFile(args->appContext->map) != 0)
+    if(args->appContext->inputText->size == 1)
+    {
+        printf("\nNo map name");
+        return;
+    }
+    if(generateMapFile(args->appContext->map,args->appContext->inputText) != 0)
     {
         fprintf(stderr, "\ngenerateMapFile error");
     }
@@ -49,10 +53,11 @@ void saveMap(void * voidArgs)
 }
 
 int generateMapFile(
-    mapTile_t map[MAP_SIZE][MAP_SIZE]
+    mapTile_t map[MAP_SIZE][MAP_SIZE],
+    sizedString_t * mapName
 )
 {
-    FILE * mapFile = fopen("maps/map.zalde", "w");
+    FILE * mapFile = saveMapName(mapName);
     if(mapFile == NULL)
     {
         fprintf(stderr, "\nfopen error");
@@ -105,4 +110,35 @@ char getTileChar(mapTile_t tile)
     }
 
     return 'f';
+}
+
+FILE * saveMapName(
+    sizedString_t * mapName
+)
+{
+    char * mapNameWithExtension = malloc(mapName->size + 11);
+    char path[6] = "maps/";
+    char extension[7] = ".zalde";
+
+    if(mapNameWithExtension == NULL)
+    {
+        fprintf(stderr, "\nmalloc error");
+        return NULL;
+    }
+    mapNameWithExtension[0] = '\0';
+    
+    strcat(mapNameWithExtension, path);
+    strcat(mapNameWithExtension, mapName->string);
+    strcat(mapNameWithExtension, extension);
+
+    FILE * mapNameFile = fopen(mapNameWithExtension, "w");
+    if(mapNameFile == NULL)
+    {
+        fprintf(stderr, "\nError opening mapName.txt");
+        return NULL;
+    }
+
+    free(mapNameWithExtension);
+
+    return mapNameFile;
 }
