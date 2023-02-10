@@ -54,3 +54,6 @@ dkms.conf
 
 # Map files
 *.zalde
+
+# IDE files
+.vscode/
