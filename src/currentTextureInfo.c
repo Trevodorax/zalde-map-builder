@@ -52,4 +52,6 @@ int updateCurrentTextureInfo(
         fprintf(stderr, "SDL_RenderCopy error: %s", SDL_GetError());
         return -1;
     }
+
+    return 0;
 }
