@@ -8,8 +8,9 @@ task-id/task-text
 ### Naming
 task-id: commit message
 ### Example
-36991: made the function prototype
+36991: make the function prototype
 ## Merging
-* When task is finished, merge branch into main
-* Send a message to announce that you are merging
+* When a task is finished, rebase your branch on main, and create a pull request.
+* You must **never** merge a branch yourself, it must be approved by at least one person in the project.
 
+If you disagree with these, just tell us, we will be glad to ignore you !

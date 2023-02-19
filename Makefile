@@ -19,6 +19,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) $(LIBS) -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(INCDIR)/%.h
+	@mkdir -p build
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean build
