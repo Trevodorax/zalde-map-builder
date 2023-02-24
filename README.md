@@ -23,7 +23,7 @@ If on Window or Mac, update the Makefile (the part where we use sdl and sdl-ttf)
 
 If it doesn't work, just use a good OS and it should be just fine !
 
-The, run make to generate the executable file :
+Then, run make to generate the executable file :
 
 `make`
 
