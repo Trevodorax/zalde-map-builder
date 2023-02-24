@@ -2,7 +2,7 @@
 #define _CONSTANTS_H_
 
 #define WINDOW_SIZE_X 2000
-#define WINDOW_SIZE_Y 900
+#define WINDOW_SIZE_Y 1000
 
 #define TILE_SECTION_POS_X 50
 #define TILE_SECTION_POS_Y 50
@@ -47,7 +47,7 @@
 
 // constants for input box position and size
 #define INPUT_BOX_POS_X 100
-#define INPUT_BOX_POS_Y 860
+#define INPUT_BOX_POS_Y 950
 #define INPUT_BOX_HEIGHT 20
 #define INPUT_BOX_MAX_WIDTH 1300
 #define INPUT_BOX_MAX_CHARS INPUT_BOX_MAX_WIDTH / LETTER_SIZE
