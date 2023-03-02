@@ -98,4 +98,3 @@ The design and functionnalities were decided by Johan and Paul.
 The features were shared between Paul and Johan.
 
 For more information about who did which parts, you can look at the git history.
- 
